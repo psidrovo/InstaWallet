@@ -4,13 +4,14 @@
  */
 package ec.edu.ups.InstaWallet.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.springframework.data.annotation.Id;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -18,7 +19,8 @@ import org.springframework.data.annotation.Id;
  * @author EstAdolfoSebastianJa
  */
 @Entity
-public class Credito {
+public class Credito implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -31,6 +33,7 @@ public class Credito {
     private Date fechaFinal;
     private int numeroCuotasRestantes;
     private String numeroCuenta;
+    @OneToMany(mappedBy = "creditoID")
     private ArrayList<DetalleCredito> detallesCredito;
 
     public Credito() {

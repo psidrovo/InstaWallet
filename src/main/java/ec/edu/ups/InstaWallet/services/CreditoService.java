@@ -27,6 +27,7 @@ public class CreditoService implements CreditoRepo {
 
     @Autowired
     private CreditoRepo creditoRepo;
+    
 
     @Override
     public List<Credito> findAll() {
