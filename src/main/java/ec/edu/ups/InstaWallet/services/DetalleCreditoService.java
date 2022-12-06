@@ -28,7 +28,7 @@ public class DetalleCreditoService implements DetalleCreditoRepo {
     private DetalleCreditoRepo detalleCreditoRepo;
 
     @Override
-    public void deleteAllByIdInBatch(Iterable<Long> ids) {
+    public void deleteAllByIdInBatch(Iterable<Integer> ids) {
         // TODO Auto-generated method stub
         
     }
@@ -64,18 +64,18 @@ public class DetalleCreditoService implements DetalleCreditoRepo {
     }
 
     @Override
-    public DetalleCredito getById(Long arg0) {
+    public DetalleCredito getById(Integer arg0) {
         return detalleCreditoRepo.getById(arg0);
     }
 
     @Override
-    public DetalleCredito getOne(Long arg0) {
+    public DetalleCredito getOne(Integer arg0) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public DetalleCredito getReferenceById(Long id) {
+    public DetalleCredito getReferenceById(Integer id) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -98,7 +98,7 @@ public class DetalleCreditoService implements DetalleCreditoRepo {
     }
 
     @Override
-    public List<DetalleCredito> findAllById(Iterable<Long> ids) {
+    public List<DetalleCredito> findAllById(Iterable<Integer> ids) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -136,26 +136,26 @@ public class DetalleCreditoService implements DetalleCreditoRepo {
     }
 
     @Override
-    public void deleteAllById(Iterable<? extends Long> ids) {
+    public void deleteAllById(Iterable<? extends Integer> ids) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         
         detalleCreditoRepo.deleteById(id);
         
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existsById(Integer id) {
         // TODO Auto-generated method stub
         return detalleCreditoRepo.existsById(id);
     }
 
     @Override
-    public Optional<DetalleCredito> findById(Long id) {
+    public Optional<DetalleCredito> findById(Integer id) {
         // TODO Auto-generated method stub
         return Optional.empty();
     }

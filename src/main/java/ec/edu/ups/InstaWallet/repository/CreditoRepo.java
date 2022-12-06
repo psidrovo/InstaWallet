@@ -12,6 +12,6 @@ import ec.edu.ups.InstaWallet.modelo.Credito;
  *
  * @author EstAdolfoSebastianJa
  */
-public interface CreditoRepo extends JpaRepository<Credito, Long>{
+public interface CreditoRepo extends JpaRepository<Credito, Integer>{
     
 }

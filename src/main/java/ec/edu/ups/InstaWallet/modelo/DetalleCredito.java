@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -24,6 +25,7 @@ public class DetalleCredito implements Serializable {
     private Date fechaPago;
     private double valorPago;
     @ManyToOne
+    @JoinColumn(name = "creditoID")
     private Credito creditoID;
 
     public DetalleCredito() {

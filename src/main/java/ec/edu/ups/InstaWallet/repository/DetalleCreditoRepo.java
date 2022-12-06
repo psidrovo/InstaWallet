@@ -10,6 +10,6 @@ import ec.edu.ups.InstaWallet.modelo.DetalleCredito;
  *
  * @author EstAdolfoSebastianJa
  */
-public interface DetalleCreditoRepo extends JpaRepository<DetalleCredito, Long>{
+public interface DetalleCreditoRepo extends JpaRepository<DetalleCredito, Integer>{
     
 }

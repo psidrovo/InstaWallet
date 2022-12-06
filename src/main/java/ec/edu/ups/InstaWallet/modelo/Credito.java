@@ -23,12 +23,13 @@ public class Credito implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
     private String estadoSolicitudCredito;
     private String estado;
     private String valorCredito;
     private double interes;
     private double cuotaCredito;
+    private int numeroDeCuotas;
     private Date fechaInicio;
     private Date fechaFinal;
     private int numeroCuotasRestantes;
@@ -39,22 +40,38 @@ public class Credito implements Serializable {
     public Credito() {
     }
 
-    public Credito(int id, String estadoSolicitudCredito, String estado, String valorCredito, double interes, double cuotaCredito, Date fechaInicio, Date fechaFinal, int numeroCuotasRestantes, String numeroCuenta, ArrayList<DetalleCredito> detallesCredito) {
+    public Credito(Integer id, String estadoSolicitudCredito, String estado, String valorCredito, double interes, double cuotaCredito, int numeroDeCuotas, Date fechaInicio, Date fechaFinal, int numeroCuotasRestantes, String numeroCuenta, ArrayList<DetalleCredito> detallesCredito) {
         this.id = id;
         this.estadoSolicitudCredito = estadoSolicitudCredito;
         this.estado = estado;
         this.valorCredito = valorCredito;
         this.interes = interes;
         this.cuotaCredito = cuotaCredito;
+        this.numeroDeCuotas = numeroDeCuotas;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.numeroCuotasRestantes = numeroCuotasRestantes;
         this.numeroCuenta = numeroCuenta;
         this.detallesCredito = detallesCredito;
     }
-
-       
     
+    
+
+    public double getInteres() {
+        return interes;
+    }
+
+    public void setInteres(double interes) {
+        this.interes = interes;
+    }
+
+    public int getNumeroDeCuotas() {
+        return numeroDeCuotas;
+    }
+
+    public void setNumeroDeCuotas(int numeroDeCuotas) {
+        this.numeroDeCuotas = numeroDeCuotas;
+    }
 
     public int getId() {
         return id;
