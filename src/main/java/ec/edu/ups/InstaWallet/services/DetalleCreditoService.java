@@ -26,6 +26,15 @@ public class DetalleCreditoService implements DetalleCreditoRepo {
     
     @Autowired
     private DetalleCreditoRepo detalleCreditoRepo;
+    
+    
+    
+    
+    
+    //debe ser en el rest este metodo
+    /*public void pagarDetalleCredito(){
+        
+    }*/
 
     @Override
     public void deleteAllByIdInBatch(Iterable<Integer> ids) {

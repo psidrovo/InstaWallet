@@ -24,6 +24,7 @@ public class DetalleCredito implements Serializable {
     private int id;
     private Date fechaPago;
     private double valorPago;
+    private String estado;
     @ManyToOne
     @JoinColumn(name = "creditoID")
     private Credito creditoID;
@@ -31,12 +32,23 @@ public class DetalleCredito implements Serializable {
     public DetalleCredito() {
     }
 
-    public DetalleCredito(int id, Date fechaPago, double valorPago, Credito creditoID) {
+    public DetalleCredito(int id, Date fechaPago, double valorPago, String estado, Credito creditoID) {
         this.id = id;
         this.fechaPago = fechaPago;
         this.valorPago = valorPago;
+        this.estado = estado;
         this.creditoID = creditoID;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    
 
     public int getId() {
         return id;
