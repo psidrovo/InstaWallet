@@ -7,24 +7,20 @@ package ec.edu.ups.InstaWallet.services;
 import ec.edu.ups.InstaWallet.modelo.Credito;
 import ec.edu.ups.InstaWallet.modelo.DetalleCredito;
 import ec.edu.ups.InstaWallet.repository.CreditoRepo;
-import io.swagger.v3.oas.models.media.MediaType;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
 
 /**
  *
@@ -38,19 +34,36 @@ public class CreditoService {
     private CreditoRepo creditoRepo;
 
     private Credito credito;
-    
-    @GetMapping("/all")
-    public List<Credito> findAll(){
+
+    @GetMapping(path="/all", produces=MediaType.APPLICATION_JSON_VALUE)
+    public List<Credito> findAll() {
         return creditoRepo.findAll();
     }
-    
-    
-    
-/*
-    public void aprobarRechazarCredito(Integer id, String aprobarRechazar) {
+
+    @PostMapping("/save")
+    public Credito save(@RequestBody Credito credito) {
+        return creditoRepo.save(credito);
+    }
+
+    @GetMapping("/existe{id}")
+    public boolean existsById(@RequestParam int id) {
+        var cre = creditoRepo.findById(id);
+
+        return !cre.isEmpty();
+    }
+
+    @GetMapping("/find{id}")
+    public Credito findById(@RequestParam int id) {
+        credito = creditoRepo.getReferenceById(id);
+
+        return credito;
+    }
+
+    @PostMapping("/aprobar-rechazar-credito")
+    public void aprobarRechazarCredito(@RequestParam Integer id, @RequestParam String aprobarRechazar) {
 
         if (this.existsById(id)) {
-            credito = this.getById(id);
+            credito = this.findById(id);
 
             credito.setEstadoSolicitudCredito(aprobarRechazar);
 
@@ -64,12 +77,11 @@ public class CreditoService {
         }
     }
 
-    public void actualizarEstadoCredito(String estado) {
-        credito.setEstado(estado);
-    }
 
-    public ArrayList<DetalleCredito> generarTablaAmortizacion(int numeroDeCuotas, Date fechaInicio,
-            double valorCredito) {
+    @GetMapping("/tabla-amortizacion")
+    public ArrayList<DetalleCredito> generarTablaAmortizacion(@RequestParam int numeroDeCuotas,
+            @RequestParam Date fechaInicio,
+            @RequestParam double valorCredito) {
 
         double pagoMensual = valorCredito / numeroDeCuotas;
         double interes = calculoInteres(valorCredito);
@@ -85,7 +97,7 @@ public class CreditoService {
             det.setId(i);
             det.setFechaPago(generarFechaPago(i));
             det.setValorPago(pago);
-            
+
             listaPagos.add(det);
 
         }
@@ -114,7 +126,7 @@ public class CreditoService {
     public Date generarFechaPago(int numeroCuota) {
 
         Calendar c = Calendar.getInstance();
-        
+
         c.add(Calendar.MONTH, numeroCuota);
         Date fina = c.getTime();
 
@@ -128,7 +140,11 @@ public class CreditoService {
         Date fina = c.getTime();
 
         return fina;
-    }*/
+    }
 
+    public void actualizarEstadoCredito(@RequestParam String estado) {
+        
+        credito.setEstado(estado);
+    }
 
 }
