@@ -7,11 +7,13 @@ package ec.edu.ups.InstaWallet.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import ec.edu.ups.InstaWallet.modelo.Credito;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author EstAdolfoSebastianJa
  */
+@Repository
 public interface CreditoRepo extends JpaRepository<Credito, Integer>{
     
 }

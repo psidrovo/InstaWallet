@@ -4,9 +4,9 @@
  */
 package ec.edu.ups.InstaWallet.modelo;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,10 +19,10 @@ import javax.persistence.OneToMany;
  * @author EstAdolfoSebastianJa
  */
 @Entity
-public class Credito implements Serializable {
+public class Credito{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String estadoSolicitudCredito;
     private String estado;
@@ -35,12 +35,12 @@ public class Credito implements Serializable {
     private int numeroCuotasRestantes;
     private String numeroCuenta;
     @OneToMany(mappedBy = "creditoID")
-    private ArrayList<DetalleCredito> detallesCredito;
+    private List<DetalleCredito> detallesCredito;
 
     public Credito() {
     }
 
-    public Credito(Integer id, String estadoSolicitudCredito, String estado, String valorCredito, double interes, double cuotaCredito, int numeroDeCuotas, Date fechaInicio, Date fechaFinal, int numeroCuotasRestantes, String numeroCuenta, ArrayList<DetalleCredito> detallesCredito) {
+    public Credito(Integer id, String estadoSolicitudCredito, String estado, String valorCredito, double interes, double cuotaCredito, int numeroDeCuotas, Date fechaInicio, Date fechaFinal, int numeroCuotasRestantes, String numeroCuenta, List<DetalleCredito> detallesCredito) {
         this.id = id;
         this.estadoSolicitudCredito = estadoSolicitudCredito;
         this.estado = estado;
@@ -145,16 +145,16 @@ public class Credito implements Serializable {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public ArrayList<DetalleCredito> getDetallesCredito() {
+    public List<DetalleCredito> getDetallesCredito() {
         return detallesCredito;
     }
 
-    public void setDetallesCredito(ArrayList<DetalleCredito> detallesCredito) {
+    public void setDetallesCredito(List<DetalleCredito> detallesCredito) {
         this.detallesCredito = detallesCredito;
     }
     
     public void anadirDetalleCredito(DetalleCredito detalle){
-        ArrayList<DetalleCredito> detalles = this.getDetallesCredito();
+        List<DetalleCredito> detalles = this.getDetallesCredito();
         
         detalles.add(detalle);
     }

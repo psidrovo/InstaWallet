@@ -4,7 +4,6 @@
  */
 package ec.edu.ups.InstaWallet.modelo;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,9 +17,10 @@ import javax.persistence.ManyToOne;
  * @author EstAdolfoSebastianJa
  */
 @Entity
-public class DetalleCredito implements Serializable {
+public class DetalleCredito{
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Date fechaPago;
     private double valorPago;
