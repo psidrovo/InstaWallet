@@ -22,6 +22,7 @@ public class SwaggerApiConfig {
         return new OpenAPI()
                 .components(new Components())
                 .info(new Info().title("Practica 2.3").description(
-                        "This is a sample Spring Boot RESTful service using springdoc-openapi and OpenAPI 3."));
+                        "Repositorio de Swagger de la aplicación instawallet correspondiente"
+                                + " a la practica 2.3"));
     }
 }

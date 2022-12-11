@@ -4,6 +4,7 @@
  */
 package ec.edu.ups.InstaWallet.modelo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
 import java.util.List;
 
@@ -24,23 +25,27 @@ public class Credito{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    
     private String estadoSolicitudCredito;
     private String estado;
-    private String valorCredito;
+    private double valorCredito;
     private double interes;
     private double cuotaCredito;
     private int numeroDeCuotas;
     private Date fechaInicio;
     private Date fechaFinal;
     private int numeroCuotasRestantes;
-    private String numeroCuenta;
+    //@ManyToOne()
+    //private String numeroCuenta;
     @OneToMany(mappedBy = "creditoID")
+    @JsonManagedReference
     private List<DetalleCredito> detallesCredito;
 
     public Credito() {
     }
 
-    public Credito(Integer id, String estadoSolicitudCredito, String estado, String valorCredito, double interes, double cuotaCredito, int numeroDeCuotas, Date fechaInicio, Date fechaFinal, int numeroCuotasRestantes, String numeroCuenta, List<DetalleCredito> detallesCredito) {
+    /*public Credito(Integer id, String estadoSolicitudCredito, String estado, double valorCredito, double interes, double cuotaCredito, int numeroDeCuotas, Date fechaInicio, Date fechaFinal, int numeroCuotasRestantes, String numeroCuenta, List<DetalleCredito> detallesCredito) {
         this.id = id;
         this.estadoSolicitudCredito = estadoSolicitudCredito;
         this.estado = estado;
@@ -51,9 +56,16 @@ public class Credito{
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.numeroCuotasRestantes = numeroCuotasRestantes;
-        this.numeroCuenta = numeroCuenta;
+        //this.numeroCuenta = numeroCuenta;
         this.detallesCredito = detallesCredito;
+    }*/
+
+    public Credito(double valorCredito, int numeroDeCuotas) {
+        this.valorCredito = valorCredito;
+        this.numeroDeCuotas = numeroDeCuotas;
     }
+    
+    
     
     
 
@@ -73,7 +85,7 @@ public class Credito{
         this.numeroDeCuotas = numeroDeCuotas;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -97,11 +109,11 @@ public class Credito{
         this.estado = estado;
     }
 
-    public String getValorCredito() {
+    public double getValorCredito() {
         return valorCredito;
     }
 
-    public void setValorCredito(String valorCredito) {
+    public void setValorCredito(double valorCredito) {
         this.valorCredito = valorCredito;
     }
 
@@ -137,13 +149,6 @@ public class Credito{
         this.numeroCuotasRestantes = numeroCuotasRestantes;
     }
 
-    public String getNumeroCuenta() {
-        return numeroCuenta;
-    }
-
-    public void setNumeroCuenta(String numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
-    }
 
     public List<DetalleCredito> getDetallesCredito() {
         return detallesCredito;
@@ -161,7 +166,11 @@ public class Credito{
 
     @Override
     public String toString() {
-        return "Credito{" + "id=" + id + ", estadoSolicitudCredito=" + estadoSolicitudCredito + ", estado=" + estado + ", valorCredito=" + valorCredito + ", cuotaCredito=" + cuotaCredito + ", fechaInicio=" + fechaInicio + ", fechaFinal=" + fechaFinal + ", numeroCuotasRestantes=" + numeroCuotasRestantes + ", numeroCuenta=" + numeroCuenta + ", detallesCredito=" + detallesCredito + '}';
+        return "Credito{" + "id=" + id + ", estadoSolicitudCredito=" + estadoSolicitudCredito + 
+                ", estado=" + estado + ", valorCredito=" + valorCredito + ", cuotaCredito=" + 
+                cuotaCredito + ", fechaInicio=" + fechaInicio + ", fechaFinal=" + fechaFinal + 
+                ", numeroCuotasRestantes=" + numeroCuotasRestantes +
+                ", detallesCredito=" + detallesCredito + '}';
     }
     
     

@@ -4,6 +4,10 @@
  */
 package ec.edu.ups.InstaWallet.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +21,7 @@ import javax.persistence.ManyToOne;
  * @author EstAdolfoSebastianJa
  */
 @Entity
-public class DetalleCredito{
+public class DetalleCredito implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +31,7 @@ public class DetalleCredito{
     private String estado;
     @ManyToOne
     @JoinColumn(name = "creditoID")
+    @JsonBackReference 
     private Credito creditoID;
 
     public DetalleCredito() {
