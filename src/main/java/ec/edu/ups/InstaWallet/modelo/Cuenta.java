@@ -23,11 +23,18 @@ public class Cuenta {
 	private double monto;
 	private Date fechaCreacion;
 	
+	@OneToMany(mappedBy = "cuentaI")
+	@JsonManagedReference
 	private List<Credito> creditos;
 	
 	@OneToMany(mappedBy = "cuentaID")
 	@JsonManagedReference
 	private List<DetalleCuenta> detallesCuentas;
+	
+	
+
+	public Cuenta() {
+	}
 
 	public Integer getId() {
 		return id;
@@ -76,6 +83,24 @@ public class Cuenta {
 	public void setCreditos(List<Credito> creditos) {
 		this.creditos = creditos;
 	}
+
+	public List<DetalleCuenta> getDetallesCuentas() {
+		return detallesCuentas;
+	}
+
+	public void setDetallesCuentas(List<DetalleCuenta> detallesCuentas) {
+		this.detallesCuentas = detallesCuentas;
+	}
+
+	@Override
+	public String toString() {
+		return "Cuenta [id=" + id + ", numerCuenta=" + numerCuenta + ", estado=" + estado + ", monto=" + monto
+				+ ", fechaCreacion=" + fechaCreacion + ", creditos=" + creditos + ", detallesCuentas=" + detallesCuentas
+				+ "]";
+	}
+	
+	
+
 	
 	
 
