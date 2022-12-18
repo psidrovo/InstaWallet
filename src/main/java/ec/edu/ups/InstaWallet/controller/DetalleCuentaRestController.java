@@ -1,6 +1,7 @@
 package ec.edu.ups.InstaWallet.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "DetalleCuenta", description = "Operaciones de la clase DetalleCuenta")
 public class DetalleCuentaRestController {
 	
-	@Autowired
+	//@Autowired
 	private DetalleCuentaService detalleCuentaService;
 
 	public DetalleCuentaRestController(DetalleCuentaService detalleCuentaService) {
@@ -31,7 +32,7 @@ public class DetalleCuentaRestController {
     }
 	
 	@GetMapping( value = "/listar", produces = "application/json")
-    public ArrayList<DetalleCuenta> listarAportaciones() {
+    public List<DetalleCuenta> listarAportaciones() {
         return this.detalleCuentaService.findAll();
     }
 	
