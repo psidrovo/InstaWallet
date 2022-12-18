@@ -13,7 +13,7 @@ public class DetalleCuentaService {
 	
 private DetalleCuentaRepo detalleCuentaRepo; 
 	
-	public DetalleCuenta create(DetalleCuenta detalleCuenta){
+	public DetalleCuenta save(DetalleCuenta detalleCuenta){
         return detalleCuentaRepo.save(detalleCuenta);
     }
 	

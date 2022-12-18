@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Cuenta {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 	
 	private String numerCuenta;

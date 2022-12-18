@@ -14,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class DetalleCuenta {
 	
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	 private int id;
 	 
 	 private String tipoMovimiento;

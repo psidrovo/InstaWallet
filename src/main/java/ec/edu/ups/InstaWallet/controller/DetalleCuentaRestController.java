@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ec.edu.ups.InstaWallet.modelo.Cuenta;
+
 import ec.edu.ups.InstaWallet.modelo.DetalleCuenta;
 import ec.edu.ups.InstaWallet.services.DetalleCuentaService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,12 +26,12 @@ public class DetalleCuentaRestController {
 	}
 	
 	@PostMapping(value = "/detalleCuenta", produces = "application/json")
-	public DetalleCuenta guardarCurso(DetalleCuenta detalleCuenta){
-        return this.detalleCuentaService.create(detalleCuenta);
+	public DetalleCuenta agregarMovimiento(DetalleCuenta detalleCuenta){
+        return this.detalleCuentaService.save(detalleCuenta);
     }
 	
 	@GetMapping( value = "/listar", produces = "application/json")
-    public ArrayList<DetalleCuenta> listarCurso() {
+    public ArrayList<DetalleCuenta> listarAportaciones() {
         return this.detalleCuentaService.findAll();
     }
 	
