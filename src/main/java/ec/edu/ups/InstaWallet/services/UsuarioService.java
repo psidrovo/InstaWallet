@@ -4,7 +4,7 @@
  */
 package ec.edu.ups.InstaWallet.services;
 
-import ec.edu.ups.InstaWallet.modelo.Usuarios;
+import ec.edu.ups.InstaWallet.modelo.Usuario;
 import ec.edu.ups.InstaWallet.repository.UsuarioRepo;
 import java.util.List;
 import java.util.Optional;
@@ -19,21 +19,16 @@ import org.springframework.stereotype.Service;
 public class UsuarioService {
     @Autowired
     private UsuarioRepo usuarioRepo;
-    
-    /**\
-     * 
-     * @param usuario
-     * @return 
-     */
-    public Usuarios guardar(Usuarios usuario){
+
+    public Usuario guardar(Usuario usuario){
         return usuarioRepo.save(usuario);
     }
     
-    public Optional<Usuarios> findById(String id){
-        return usuarioRepo.findById(id);
+    public Usuario findById(String id){
+        return usuarioRepo.findById(id).get();
     }
     
-    public List<Usuarios> findAll(){
+    public List<Usuario> findAll(){
         return usuarioRepo.findAll();
     }
     
