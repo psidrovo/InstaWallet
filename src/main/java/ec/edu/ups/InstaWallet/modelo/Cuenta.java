@@ -22,11 +22,13 @@ public class Cuenta {
 	
 	//@OneToMany(mappedBy = "cuentaI")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference
 	@JsonIgnore
 	private List<Credito> creditos;
 	
 	//@OneToMany(mappedBy = "cuentaID")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference
 	@JsonIgnore
 	private List<DetalleCuenta> detallesCuentas;
 
@@ -85,27 +87,27 @@ public class Cuenta {
 		return creditos;
 	}
 
-	/*public void setCreditos(List<Credito> creditos) {
+	public void setCreditos(List<Credito> creditos) {
 		this.creditos = creditos;
-	}*/
+	}
 
 	public List<DetalleCuenta> getDetallesCuentas() {
 		return detallesCuentas;
 	}
 
-	/*public void setDetallesCuentas(List<DetalleCuenta> detallesCuentas) {
+	public void setDetallesCuentas(List<DetalleCuenta> detallesCuentas) {
 		this.detallesCuentas = detallesCuentas;
-	}*/
+	}
 	
 	
 
-	/*public Socio getSocio() {
+	public Socio getSocio() {
 		return socio;
 	}
 
 	public void setSocio(Socio socio) {
 		this.socio = socio;
-	}*/
+	}
 
 	@Override
 	public String toString() {

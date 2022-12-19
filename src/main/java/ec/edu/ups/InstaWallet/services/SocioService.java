@@ -18,6 +18,7 @@ import java.util.List;
 public class SocioService {
     @Autowired
     private SocioRepository socioRepository;
+    @Autowired
     private CuentaRepo cuentaRepo;
     public SocioService(SocioRepository socioRepository, CuentaRepo cuentaRepo) {
         this.socioRepository = socioRepository;
