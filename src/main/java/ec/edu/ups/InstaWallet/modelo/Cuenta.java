@@ -29,11 +29,12 @@ public class Cuenta {
 	
 	@OneToMany(mappedBy = "cuentaI")
 	@JsonManagedReference
+	@JsonIgnore
 	private List<Credito> creditos;
 	
 	@OneToMany(mappedBy = "cuentaID")
 	@JsonManagedReference
-
+	@JsonIgnore
 	private List<DetalleCuenta> detallesCuentas;
 
 	@ManyToOne(cascade = CascadeType.ALL)

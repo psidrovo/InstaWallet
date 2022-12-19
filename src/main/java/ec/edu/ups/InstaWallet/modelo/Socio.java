@@ -26,6 +26,7 @@ public class Socio {
     
     @OneToMany(mappedBy = "socio")
     @JsonManagedReference
+    @JsonIgnore
     private List<Cuenta> cuentas;
 
     public String getIdentificacionSocio() {

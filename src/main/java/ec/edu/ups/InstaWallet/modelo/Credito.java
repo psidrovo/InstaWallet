@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,19 +27,27 @@ import javax.persistence.OneToMany;
 @Entity
 public class Credito{
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id",unique = true)
     private Integer id;
-    
-    
+	@Column(name = "estado_solicitud_credito", length = 255)
     private String estadoSolicitudCredito;
+	@Column(name = "estado", length = 255)
     private String estado;
+	@Column(name = "valor_credito", length = 255)
     private double valorCredito;
+	@Column(name = "interes", length = 255)
     private double interes;
+	@Column(name = "cuota_credito", length = 255)
     private double cuotaCredito;
+	@Column(name = "numero_de_cuotas", length = 255)
     private int numeroDeCuotas;
+	@Column(name = "fecha_inicio", length = 255)
     private Date fechaInicio;
+	@Column(name = "fecha_final", length = 255)
     private Date fechaFinal;
+	@Column(name = "numero_cuotas_restantes", length = 255)
     private int numeroCuotasRestantes;
     
     @ManyToOne(cascade = CascadeType.ALL)
