@@ -42,7 +42,7 @@ public class Credito{
     private int numeroCuotasRestantes;
     
     @ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="cunetaI", nullable=false,referencedColumnName = "id")
+	@JoinColumn(name="cunetaI", nullable=false,referencedColumnName = "numero_cuenta")
 	private Cuenta cuentaI;
     
     

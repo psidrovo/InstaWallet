@@ -2,15 +2,7 @@ package ec.edu.ups.InstaWallet.modelo;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="detalle_cuenta")
@@ -27,13 +19,9 @@ public class DetalleCuenta {
 	@Column(name = "fecha", length = 255)
 	private LocalDate fecha;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cunetaID", nullable = false, referencedColumnName = "id")
-	private Cuenta cuentaID;
-
-	public DetalleCuenta() {
-	}
-
+	@ManyToOne(fetch = FetchType.EAGER)
+	//@JoinColumn(name = "cunetaID", nullable = false, referencedColumnName = "numero_cuenta")
+	private Cuenta cuenta;
 
 
 	public int getId() {
@@ -79,21 +67,22 @@ public class DetalleCuenta {
 	}
 
 
-
-	public Cuenta getCuentaID() {
-		return cuentaID;
+	public Cuenta getCuenta() {
+		return cuenta;
 	}
 
-	public void setCuentaID(Cuenta cuentaID) {
-		this.cuentaID = cuentaID;
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
 	}
 
 	@Override
 	public String toString() {
-		return "DetalleCuenta [id=" + id + ", tipoMovimiento=" + tipoMovimiento + ", valor=" + valor + ", fecha="
-				+ fecha + ", cuentaID=" + cuentaID + "]";
+		return "DetalleCuenta{" +
+				"id=" + id +
+				", tipoMovimiento='" + tipoMovimiento + '\'' +
+				", valor=" + valor +
+				", fecha=" + fecha +
+				", cuenta=" + cuenta +
+				'}';
 	}
-	 
-	 
-
 }

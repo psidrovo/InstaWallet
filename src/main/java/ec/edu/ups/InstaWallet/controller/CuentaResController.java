@@ -3,17 +3,18 @@ package ec.edu.ups.InstaWallet.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import ec.edu.ups.InstaWallet.services.SocioService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ec.edu.ups.InstaWallet.modelo.Cuenta;
 import ec.edu.ups.InstaWallet.modelo.DetalleCuenta;
 import ec.edu.ups.InstaWallet.services.CuentaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/cuenta")
@@ -22,21 +23,19 @@ public class CuentaResController {
 	
 	
 	private CuentaService cuentaService;
+	private SocioService socioService;
 
-	public CuentaResController(CuentaService cuentaService) {
+	public CuentaResController(CuentaService cuentaService, SocioService socioService) {
 		this.cuentaService = cuentaService;
+		this.socioService = socioService;
 	}
 	
-	@PostMapping(value = "/" ,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Cuenta crearCuenta(Cuenta cuenta){
-		try {
-			return this.cuentaService.save(cuenta);
-		}catch (Exception e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
-		
-        
+	@PostMapping(value = "/" , consumes = {"*/*"})
+	@Operation(summary = "Crear una cuenta")
+	ResponseEntity<Cuenta> crearCuenta(@Valid @RequestBody Cuenta cuenta){
+		System.out.println("Cuenta recibida: " + cuenta);
+		this.socioService.crearSocio(cuenta.getSocio());
+		return new ResponseEntity<>(this.cuentaService.save(cuenta), HttpStatus.CREATED);
     }
 	
 	@GetMapping( value = "/listarCuentas",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

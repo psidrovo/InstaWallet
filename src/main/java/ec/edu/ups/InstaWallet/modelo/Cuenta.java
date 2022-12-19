@@ -14,11 +14,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Cuenta {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id",unique = true)
-    private Integer id;
-	
-	@Column(name = "numero_cuenta", length = 255)
+	@Column(name = "numero_cuenta", unique = true)
 	private String numerCuenta;
 	@Column(name = "estado", length = 255)
 	private boolean estado;
@@ -31,26 +27,12 @@ public class Cuenta {
 	@JsonManagedReference
 	private List<Credito> creditos;
 	
-	@OneToMany(mappedBy = "cuentaID")
-	@JsonManagedReference
-
+	@OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
 	private List<DetalleCuenta> detallesCuentas;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="socio_id", nullable=false,referencedColumnName = "identificacion_socio")
+	@ManyToOne(fetch = FetchType.EAGER)
+	//@JoinColumn(name="socio_id", nullable=false,referencedColumnName = "identificacion_socio")
 	private Socio socio;
-
-	public Cuenta() {
-
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getNumerCuenta() {
 		return numerCuenta;
@@ -114,15 +96,14 @@ public class Cuenta {
 
 	@Override
 	public String toString() {
-		return "Cuenta [id=" + id + ", numerCuenta=" + numerCuenta + ", estado=" + estado + ", monto=" + monto
-				+ ", fechaCreacion=" + fechaCreacion + ", socio=" + socio + ", creditos=" + creditos
-				+ ", detallesCuentas=" + detallesCuentas + "]";
+		return "Cuenta{" +
+				"numerCuenta='" + numerCuenta + '\'' +
+				", estado=" + estado +
+				", monto=" + monto +
+				", fechaCreacion=" + fechaCreacion +
+				", creditos=" + creditos +
+				", detallesCuentas=" + detallesCuentas +
+				", socio=" + socio +
+				'}';
 	}
-
-	
-	
-
-	
-	
-
 }
