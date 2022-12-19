@@ -3,16 +3,18 @@ package ec.edu.ups.InstaWallet.controller;
 import ec.edu.ups.InstaWallet.modelo.Socio;
 import ec.edu.ups.InstaWallet.services.SocioService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/socio")
+@Tag(name = "Socio", description = "Socio de la entidad bancaria")
 public class SocioRestController {
 
     @Autowired
@@ -27,9 +29,10 @@ public class SocioRestController {
         return socioService.listarSocios();
     }
 
-    @PostMapping("/")
+    @PostMapping(value = "/", consumes = {"*/*"})
     @Operation(summary = "Crear un socio")
-    Socio crear(Socio socio){
-        return this.socioService.crearSocio(socio);
+    ResponseEntity<Socio> crear(@Valid @RequestBody Socio socio){
+        System.out.println("Socio ingresado: " +socio.toString());
+        return new ResponseEntity<>(this.socioService.crearSocio(socio), HttpStatus.CREATED);
     }
 }

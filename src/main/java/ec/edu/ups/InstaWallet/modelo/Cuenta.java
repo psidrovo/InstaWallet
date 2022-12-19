@@ -27,7 +27,7 @@ public class Cuenta {
 	@JsonManagedReference
 	private List<DetalleCuenta> detallesCuentas;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL,optional = false)
 	@JoinColumn(name="socio_id", nullable=false,referencedColumnName = "identificacion_socio")
 	private Socio socio;
 

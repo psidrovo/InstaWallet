@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * @author Pidrovo
  */
 @Repository
-public interface SocioRepository extends JpaRepository<Socio,String> {
+public interface SocioRepository extends JpaRepository<Socio,Long> {
 }

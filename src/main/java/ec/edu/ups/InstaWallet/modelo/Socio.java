@@ -1,5 +1,6 @@
 package ec.edu.ups.InstaWallet.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -13,7 +14,6 @@ import java.util.List;
 @Table(name="socio")
 public class Socio {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "identificacion_socio",unique = true)
     String identificacionSocio;
     @Column(name = "nombre_socio", length = 255)
@@ -26,8 +26,8 @@ public class Socio {
 
     @OneToMany(mappedBy = "socio")
     @JsonManagedReference
+    @JsonIgnore
     private List<Cuenta> payments;
-
 
     public String getIdentificacionSocio() {
         return identificacionSocio;
@@ -61,6 +61,15 @@ public class Socio {
         this.telefonoSocio = telefonoSocio;
     }
 
+    public List<Cuenta> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Cuenta> payments) {
+        this.payments = payments;
+    }
+
+
     @Override
     public String toString() {
         return "Socio{" +
@@ -68,6 +77,7 @@ public class Socio {
                 ", nombreSocio='" + nombreSocio + '\'' +
                 ", correoSocio='" + correoSocio + '\'' +
                 ", telefonoSocio='" + telefonoSocio + '\'' +
+                ", payments=" + payments +
                 '}';
     }
 }
