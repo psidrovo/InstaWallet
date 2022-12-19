@@ -4,7 +4,7 @@
  */
 package ec.edu.ups.InstaWallet.repository;
 
-import ec.edu.ups.InstaWallet.modelo.Usuarios;
+import ec.edu.ups.InstaWallet.modelo.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author dduta
  */
 @Repository
-public interface UsuarioRepo extends JpaRepository<Usuarios, String>{
+public interface UsuarioRepo extends JpaRepository<Usuario, String>{
     
 }

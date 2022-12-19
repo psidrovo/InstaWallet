@@ -44,8 +44,7 @@ public class Cuenta {
 	private Socio socio;
 
 	public Cuenta() {
-		
-		
+
 	}
 
 	public Integer getId() {

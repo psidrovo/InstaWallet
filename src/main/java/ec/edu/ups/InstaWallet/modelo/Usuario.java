@@ -5,6 +5,7 @@
 package ec.edu.ups.InstaWallet.modelo;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,27 +14,15 @@ import javax.persistence.Id;
  * @author dduta
  */
 @Entity
-public class Usuarios implements Serializable {
+public class Usuario implements Serializable {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "identificacion_usuario",unique = true)
     private String identificadorUsuario;
-
     private String nombre;
     private String correo;
     private String password;
     private String cargo;
-
-    public Usuarios() {
-    }
-
-    public Usuarios(String identificadorUsuario, String nombre, String correo, String password, String cargo) {
-        this.identificadorUsuario = identificadorUsuario;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.password = password;
-        this.cargo = cargo;
-    }
 
     public String getIdentificadorUsuario() {
         return identificadorUsuario;
@@ -75,11 +64,15 @@ public class Usuarios implements Serializable {
         this.cargo = cargo;
     }
 
+
     @Override
     public String toString() {
-        return "Usuarios{" + "identificadorUsuario=" + identificadorUsuario + ", nombre=" + nombre + ", correo=" + correo + ", password=" + password + ", cargo=" + cargo + '}';
+        return "Usuario{" +
+                "identificadorUsuario='" + identificadorUsuario + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", correo='" + correo + '\'' +
+                ", password='" + password + '\'' +
+                ", cargo='" + cargo + '\'' +
+                '}';
     }
-    
-    
-
 }
