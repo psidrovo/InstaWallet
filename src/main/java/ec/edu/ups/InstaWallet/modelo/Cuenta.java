@@ -34,6 +34,8 @@ public class Cuenta {
 	
 
 	public Cuenta() {
+		
+		
 	}
 
 	public Integer getId() {

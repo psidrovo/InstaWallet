@@ -16,7 +16,7 @@ public class DetalleCuenta {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	 private int id;
+	 private Integer id;
 	 
 	 private String tipoMovimiento;
 	 private Double valor;

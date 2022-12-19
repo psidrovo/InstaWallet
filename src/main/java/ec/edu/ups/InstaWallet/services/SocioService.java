@@ -20,7 +20,7 @@ public class SocioService {
         this.socioRepository = socioRepository;
     }
     public List<Socio> listarSocios(){
-        return socioRepository.findAll();
+        return socioRepository.findAll(); 
     }
     public Socio crearSocio(Socio socio){
         return socioRepository.save(socio);

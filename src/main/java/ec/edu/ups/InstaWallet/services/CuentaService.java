@@ -1,8 +1,9 @@
 package ec.edu.ups.InstaWallet.services;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ec.edu.ups.InstaWallet.modelo.Cuenta;
@@ -14,7 +15,8 @@ import ec.edu.ups.InstaWallet.repository.CuentaRepo;
 
 @Service
 public class CuentaService {
-
+	
+	@Autowired
 	private CuentaRepo cuentaRepo;
 	
 	public Cuenta save(Cuenta cuenta){
@@ -28,8 +30,8 @@ public class CuentaService {
 	}
 	
 	
-	public ArrayList<Cuenta> findAll(){
-        return (ArrayList<Cuenta>) cuentaRepo.findAll();
+	public List<Cuenta> findAll(){
+        return cuentaRepo.findAll();
     }
 	
 	public boolean existsById(int id) {

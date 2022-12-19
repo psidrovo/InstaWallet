@@ -1,6 +1,7 @@
 package ec.edu.ups.InstaWallet.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import ec.edu.ups.InstaWallet.modelo.Cuenta;
 import ec.edu.ups.InstaWallet.modelo.DetalleCuenta;
 import ec.edu.ups.InstaWallet.services.CuentaService;
@@ -27,13 +27,13 @@ public class CuentaResController {
 		this.cuentaService = cuentaService;
 	}
 	
-	@PostMapping(value = "/cuenta", produces = "application/json")
+	@PostMapping(value = "/cuenta")
 	public Cuenta crearCuenta(Cuenta cuenta){
         return this.cuentaService.save(cuenta);
     }
 	
-	@GetMapping( value = "/listar", produces = "application/json")
-    public ArrayList<Cuenta> listarCuentas() {
+	@GetMapping( value = "/listarCuentas")
+    public List<Cuenta> listarCuentas() {
         return this.cuentaService.findAll();
     }
 	

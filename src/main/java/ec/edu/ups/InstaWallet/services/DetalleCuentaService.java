@@ -1,7 +1,9 @@
 package ec.edu.ups.InstaWallet.services;
 
-import java.util.ArrayList;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -11,14 +13,15 @@ import ec.edu.ups.InstaWallet.repository.DetalleCuentaRepo;
 @Service
 public class DetalleCuentaService {
 	
-private DetalleCuentaRepo detalleCuentaRepo; 
+	@Autowired
+	private DetalleCuentaRepo detalleCuentaRepo; 
 	
 	public DetalleCuenta save(DetalleCuenta detalleCuenta){
         return detalleCuentaRepo.save(detalleCuenta);
     }
 	
-	public ArrayList<DetalleCuenta> findAll(){
-        return (ArrayList<DetalleCuenta>) detalleCuentaRepo.findAll();
+	public List<DetalleCuenta> findAll(){
+        return  detalleCuentaRepo.findAll();
     }
 
 }
