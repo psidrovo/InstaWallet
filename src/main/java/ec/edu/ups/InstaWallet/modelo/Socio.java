@@ -24,9 +24,9 @@ public class Socio {
     String telefonoSocio;
 
 
+
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
-    //@JsonManagedReference
-    //@JsonIgnore
+
     private List<Cuenta> cuentas;
 
     public String getIdentificacionSocio() {

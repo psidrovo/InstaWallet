@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,12 +25,17 @@ import javax.persistence.ManyToOne;
 @Entity
 public class DetalleCredito implements Serializable{
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id",unique = true)
     private int id;
+	@Column(name = "fecha_Pago", length = 255)
     private Date fechaPago;
+	@Column(name = "valor_pagado", length = 255)
     private double valorPago;
+	@Column(name = "estado", length = 255)
     private String estado;
+	
     @ManyToOne
     @JoinColumn(name = "creditoID")
     @JsonBackReference 

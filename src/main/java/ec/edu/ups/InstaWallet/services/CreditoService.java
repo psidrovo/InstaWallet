@@ -5,50 +5,57 @@
 package ec.edu.ups.InstaWallet.services;
 
 import ec.edu.ups.InstaWallet.modelo.Credito;
-import ec.edu.ups.InstaWallet.modelo.DetalleCredito;
 import ec.edu.ups.InstaWallet.repository.CreditoRepo;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.stereotype.Service;
+
 
 /**
  *
  * @author EstAdolfoSebastianJa
  */
-@RestController
-@CrossOrigin("*")
-@RequestMapping("/credito")
-@Tag(name = "Credito", description = "Operaciones de la clase Crédito")
+
+@Service
 public class CreditoService {
 
     @Autowired
     private CreditoRepo creditoRepo;
-
-    /*
     
-    private CuentaService cuentaService;
-     */
-    private Credito credito;
+
+	public CreditoService(CreditoRepo creditoRepo) {
+		this.creditoRepo = creditoRepo;
+	}
+	
+	public Credito save(Credito credito){
+		return creditoRepo.save(credito);
+    }
+	
+	public boolean existsById(int id) {
+        var cre = creditoRepo.findById(id);
+
+        return !cre.isEmpty();
+    }
+	public Optional<Credito> findById(int id) {
+
+        return creditoRepo.findById(id);
+    }
+	
+	public List<Credito> findAll() {
+	        return creditoRepo.findAll();
+	}
+	
+    
+    
+    
+    
+   /* private Credito credito;
 
     @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Encuentra todos los créditos")
-    public List<Credito> findAll() {
-        return creditoRepo.findAll();
-    }
+   
 
     @PostMapping("/save")
     @Operation(summary = "Crear un crédito")
@@ -75,22 +82,15 @@ public class CreditoService {
         return creditoRepo.save(credito);
     }
 
-    @GetMapping("/existe{id}")
-    @Operation(summary = "Comprobar si existe un crédito")
-    public boolean existsById(@RequestParam int id) {
-        var cre = creditoRepo.findById(id);
-
-        return !cre.isEmpty();
-    }
 
     @GetMapping("/find{id}")
     @Operation(summary = "Encontrar un crédito en particular")
     public Optional<Credito> findById(@RequestParam int id) {
 
         return creditoRepo.findById(id);
-    }
+    }*/
 
-    @PostMapping("/aprobar-rechazar-credito")
+    /*@PostMapping("/aprobar-rechazar-credito")
     @Operation(summary = "Aprobar o rechazar un crédito")
     public void aprobarRechazarCredito(@RequestParam Integer id, @RequestParam String aprobarRechazar) {
 
@@ -101,7 +101,7 @@ public class CreditoService {
 
             if (aprobarRechazar.startsWith("A")) {
                 this.actualizarEstadoCredito("Activo");
-                credito.setEstadoSolicitudCredito("Aprobado");
+                credito.setEstadoSolicitudCredito("Aprobado");*/
 
                 /*
                 
@@ -111,7 +111,7 @@ public class CreditoService {
                 
                 cuentaService.save(cuenta);
                  */
-            } else {
+            /*} else {
                 this.actualizarEstadoCredito("Desactivo");
                 credito.setEstadoSolicitudCredito("Desaprobado");
             }
@@ -199,6 +199,6 @@ public class CreditoService {
     public void actualizarEstadoCredito(@RequestParam String estado) {
 
         credito.setEstado(estado);
-    }
+    }*/
 
 }
