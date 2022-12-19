@@ -44,13 +44,12 @@ public class CuentaResController {
 
 	@PostMapping("/actualizarEstado")
 	@Operation(summary = "Actualizar el estado de una Cuenta")
-    public void actualizarEstado(@RequestParam Integer id, @RequestParam Boolean estado) {
-
-        if (this.cuentaService.existsById(id)) {
-            var cuenta = this.cuentaService.findAll().get(id);
-            cuenta.setEstado(estado);
-            this.cuentaService.save(cuenta);
-        }
+    public void actualizarEstado(@RequestParam String id, @RequestParam Boolean estado) {
+            Cuenta cuenta = this.cuentaService.findByNumerCuenta(id);
+            if(cuenta!=null) {
+				cuenta.setEstado(estado);
+				this.cuentaService.save(cuenta);
+			}
 	}
 	/*
 	@GetMapping(value = "/listarAportaciones", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

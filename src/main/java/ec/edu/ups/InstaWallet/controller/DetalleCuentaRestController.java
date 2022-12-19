@@ -34,7 +34,7 @@ public class DetalleCuentaRestController {
 		return new ResponseEntity<>(this.detalleCuentaService.save(detalleCuenta), HttpStatus.CREATED);
     }
 	
-	@GetMapping( value = "/listar", produces = "application/json")
+	@GetMapping("/listar")
 	@Operation(summary = "Listar todas los detalles de cuentas")
     public List<DetalleCuenta> listarAportaciones() {
         return this.detalleCuentaService.findAll();

@@ -36,12 +36,10 @@ public class CuentaService {
 	public List<Cuenta> findAll(){
         return cuentaRepo.findAll();
     }
-	
-	public boolean existsById(int id) {
-		var cue = cuentaRepo.findById(id);
 
-		return !cue.isEmpty();
+	public Cuenta findByNumerCuenta(String numeroCuenta){
+		return cuentaRepo.findByNumerCuenta(numeroCuenta);
 	}
-	
+
 	
 }

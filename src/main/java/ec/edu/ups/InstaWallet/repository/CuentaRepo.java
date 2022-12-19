@@ -9,5 +9,6 @@ import ec.edu.ups.InstaWallet.modelo.Cuenta;
 
 @Repository
 public interface CuentaRepo extends JpaRepository<Cuenta, Integer> {
+    Cuenta findByNumerCuenta(String numerCuenta);
 
 }
