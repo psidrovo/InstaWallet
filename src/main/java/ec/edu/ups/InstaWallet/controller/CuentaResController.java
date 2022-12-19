@@ -28,7 +28,8 @@ public class CuentaResController {
 		this.cuentaService = cuentaService;
 	}
 
-	@PostMapping(value = "/" , consumes = {"*/*"})
+
+	@PostMapping("/")
 	@Operation(summary = "Crear una cuenta")
 	ResponseEntity<Cuenta> crearCuenta(@Valid @RequestBody Cuenta cuenta){
 		System.out.println("Cuenta recibida: " + cuenta);
@@ -39,9 +40,9 @@ public class CuentaResController {
     public List<Cuenta> listarCuentas() {
         return this.cuentaService.findAll();
     }
-	
-	@PostMapping(value = "/actualizarEstado", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "actualizar el estado de una Cuenta")
+
+	@PostMapping("/actualizarEstado")
+	@Operation(summary = "Actualizar el estado de una Cuenta")
     public void actualizarEstado(@RequestParam Integer id, @RequestParam Boolean estado) {
 
         if (this.cuentaService.existsById(id)) {

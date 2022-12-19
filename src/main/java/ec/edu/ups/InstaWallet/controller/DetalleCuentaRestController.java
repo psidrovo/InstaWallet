@@ -3,6 +3,7 @@ package ec.edu.ups.InstaWallet.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,8 @@ public class DetalleCuentaRestController {
 		this.detalleCuentaService = detalleCuentaService;
 	}
 	
-	@PostMapping(value = "/detalleCuenta", consumes = "*/*")
+	@PostMapping("/detalleCuenta")
+	@Operation(summary = "Metodo de creacion de Movimientos")
 	ResponseEntity <DetalleCuenta> agregarMovimiento(@Valid @RequestBody DetalleCuenta detalleCuenta){
 		System.out.println("Detalle recibido: "+detalleCuenta);
 		return new ResponseEntity<>(this.detalleCuentaService.save(detalleCuenta), HttpStatus.CREATED);

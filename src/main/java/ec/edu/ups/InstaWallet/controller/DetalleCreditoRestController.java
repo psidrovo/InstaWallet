@@ -24,8 +24,8 @@ public class DetalleCreditoRestController {
 	public DetalleCreditoRestController(DetalleCreditoService detalleCreditoService) {
 		this.detalleCreditoService = detalleCreditoService;
 	}
-	
-	@PostMapping(value = "/" , consumes = {"*/*"})
+
+	@PostMapping("/")
 	@Operation(summary = "Crear un detalle credito")
 	public DetalleCredito crearDetalleCredito(@Valid @RequestBody DetalleCredito detalleCredito, @RequestParam int creditoId){
 		var credito = creditoService.findById(creditoId).get();

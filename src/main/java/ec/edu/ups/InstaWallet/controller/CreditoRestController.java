@@ -39,8 +39,7 @@ public class CreditoRestController {
 	public Credito crearCredito(@Valid @RequestBody Credito credito){
 		return creditoService.save(credito);
     }
-	
-	@PostMapping("/aprobar-rechazar-credito")
+    @PostMapping("/aprobar-rechazar-credito")
     @Operation(summary = "Aprobar o rechazar un crédito")
     public void aprobarRechazarCredito(@RequestParam Integer id, @RequestParam String aprobarRechazar) {
 

@@ -45,8 +45,6 @@ public class Credito{
     @JoinColumn(name="id_credito")
     private List<DetalleCredito> detalleCreditoList;
 
-
-
     public Integer getId() {
         return id;
     }
@@ -148,6 +146,7 @@ public class Credito{
                 ", fechaInicio=" + fechaInicio +
                 ", fechaFinal=" + fechaFinal +
                 ", numeroCuotasRestantes=" + numeroCuotasRestantes +
+                ", detalleCreditoList=" + detalleCreditoList +
                 '}';
     }
 }

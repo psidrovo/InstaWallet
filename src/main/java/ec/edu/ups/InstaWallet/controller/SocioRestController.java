@@ -29,8 +29,8 @@ public class SocioRestController {
         return socioService.listarSocios();
     }
 
-    @PostMapping(value = "/", consumes = {"*/*"})
-    @Operation(summary = "Crear un socio")
+    @PostMapping("/")
+    @Operation(summary = "Metodo de creacion de un Socio")
     ResponseEntity<Socio> crear(@Valid @RequestBody Socio socio){
         System.out.println("Socio ingresado: " +socio.toString());
         return new ResponseEntity<>(this.socioService.crearSocio(socio), HttpStatus.CREATED);

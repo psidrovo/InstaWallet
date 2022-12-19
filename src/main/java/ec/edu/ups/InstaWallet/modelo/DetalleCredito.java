@@ -4,10 +4,6 @@
  */
 package ec.edu.ups.InstaWallet.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -17,6 +13,7 @@ import javax.persistence.*;
  * @author EstAdolfoSebastianJa
  */
 @Entity
+@Table(name="detalle_credito")
 public class DetalleCredito {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +26,7 @@ public class DetalleCredito {
 	@Column(name = "estado", length = 255)
     private String estado;
     @Column(name = "id_credito", length = 255)
-    private String creditoId;
+    private Integer creditoId;
 
     public int getId() {
         return id;
@@ -63,11 +60,11 @@ public class DetalleCredito {
         this.estado = estado;
     }
 
-    public String getCreditoId() {
+    public Integer getCreditoId() {
         return creditoId;
     }
 
-    public void setCreditoId(String creditoId) {
+    public void setCreditoId(Integer creditoId) {
         this.creditoId = creditoId;
     }
 

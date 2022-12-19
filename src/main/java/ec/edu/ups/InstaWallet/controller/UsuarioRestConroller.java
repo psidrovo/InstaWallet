@@ -36,7 +36,7 @@ public class UsuarioRestConroller {
 
     @PostMapping("/createUsuario")
     @Operation(summary = "Metodo de creacion de usuario")
-    Usuario createUsuario(Usuario usuario){
+    Usuario createUsuario(@RequestBody Usuario usuario){
         return this.usuariosService.guardar(usuario);
     }
 
