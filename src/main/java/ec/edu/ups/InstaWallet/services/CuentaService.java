@@ -6,9 +6,7 @@ import java.util.Optional;
 import ec.edu.ups.InstaWallet.repository.DetalleCuentaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ec.edu.ups.InstaWallet.modelo.Cuenta;
-
 import ec.edu.ups.InstaWallet.repository.CuentaRepo;
 
 

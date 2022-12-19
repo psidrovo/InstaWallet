@@ -6,18 +6,24 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
+@Table(name="cuenta")
 public class Cuenta {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id",unique = true)
     private Integer id;
 	
+	@Column(name = "numero_cuenta", length = 255)
 	private String numerCuenta;
+	@Column(name = "estado", length = 255)
 	private boolean estado;
+	@Column(name = "monto", length = 255)
 	private double monto;
+	@Column(name = "fecha_creacion", length = 255)
 	private LocalDate fechaCreacion;
 	
 	//@OneToMany(mappedBy = "cuentaI")
