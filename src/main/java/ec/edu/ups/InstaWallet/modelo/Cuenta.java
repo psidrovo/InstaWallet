@@ -20,10 +20,6 @@ public class Cuenta {
 	private double monto;
 	private LocalDate fechaCreacion;
 	
-	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER )
-	@JoinColumn(name="socio_id", nullable=true,referencedColumnName = "identificacion_socio")
-	private Socio socio;
-	
 	//@OneToMany(mappedBy = "cuentaI")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
