@@ -3,30 +3,33 @@ package ec.edu.ups.InstaWallet.modelo;
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="detalle_cuenta")
 public class DetalleCuenta {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	 private Integer id;
-	 
-	 private String tipoMovimiento;
-	 private Double valor;
-	 private LocalDate fecha;
-	 
-	 @ManyToOne(cascade = CascadeType.ALL)
-	 @JoinColumn(name="cunetaID", nullable=false,referencedColumnName = "id")
-	 private Cuenta cuentaID;
-	 
-	 
-	 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id",unique = true)
+	private Integer id;
+	@Column(name = "tipo_movimiento", length = 255)
+	private String tipoMovimiento;
+	@Column(name = "valor", length = 255)
+	private Double valor;
+	@Column(name = "fecha", length = 255)
+	private LocalDate fecha;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cunetaID", nullable = false, referencedColumnName = "id")
+	private Cuenta cuentaID;
 
 	public DetalleCuenta() {
 	}
