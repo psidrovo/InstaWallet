@@ -8,13 +8,15 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author dduta
  */
 @Entity
-public class Usuario implements Serializable {
+@Table(name="usuario")
+public class Usuario {
 
     @Id
     @Column(name = "identificacion_usuario",unique = true)

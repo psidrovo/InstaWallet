@@ -23,17 +23,13 @@ public class Cuenta {
 	@Column(name = "fecha_creacion", length = 255)
 	private LocalDate fechaCreacion;
 	
-	@OneToMany(mappedBy = "cuentaI")
-	@JsonManagedReference
-	@JsonIgnore
+	@OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
 	private List<Credito> creditos;
-	
 
 	@OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
 	private List<DetalleCuenta> detallesCuentas;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	//@JoinColumn(name="socio_id", nullable=false,referencedColumnName = "identificacion_socio")
+	@ManyToOne
 	private Socio socio;
 
 	public String getNumerCuenta() {
@@ -60,7 +56,7 @@ public class Cuenta {
 		this.monto = monto;
 	}
 
-	
+
 
 	public LocalDate getFechaCreacion() {
 		return fechaCreacion;
@@ -85,8 +81,8 @@ public class Cuenta {
 	public void setDetallesCuentas(List<DetalleCuenta> detallesCuentas) {
 		this.detallesCuentas = detallesCuentas;
 	}
-	
-	
+
+
 
 	public Socio getSocio() {
 		return socio;

@@ -18,14 +18,15 @@ import java.util.List;
 public class SocioService {
     @Autowired
     private SocioRepository socioRepository;
-    @Autowired
-    private CuentaRepo cuentaRepo;
-    public SocioService(SocioRepository socioRepository, CuentaRepo cuentaRepo) {
+    public SocioService(SocioRepository socioRepository) {
         this.socioRepository = socioRepository;
-        this.cuentaRepo = cuentaRepo;
     }
     public List<Socio> listarSocios(){
         return socioRepository.findAll(); 
+    }
+
+    public Socio findById(Socio socio){
+        return socioRepository.findByIdentificacion(socio.getIdentificacionSocio());
     }
     public Socio crearSocio(Socio socio){
         return socioRepository.save(socio);

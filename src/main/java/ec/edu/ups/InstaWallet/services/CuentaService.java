@@ -3,7 +3,9 @@ package ec.edu.ups.InstaWallet.services;
 import java.util.List;
 import java.util.Optional;
 
+import ec.edu.ups.InstaWallet.modelo.Socio;
 import ec.edu.ups.InstaWallet.repository.DetalleCuentaRepo;
+import ec.edu.ups.InstaWallet.repository.SocioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ec.edu.ups.InstaWallet.modelo.Cuenta;
@@ -17,24 +19,23 @@ public class CuentaService {
 
 	@Autowired
 	private CuentaRepo cuentaRepo;
-	@Autowired
 	private DetalleCuentaRepo detalleCuentaRepo;
+	private SocioRepository socioRepository;
 
-	public CuentaService(CuentaRepo cuentaRepo, DetalleCuentaRepo detalleCuentaRepo) {
+	public CuentaService(CuentaRepo cuentaRepo, DetalleCuentaRepo detalleCuentaRepo, SocioRepository socioRepository) {
 		this.cuentaRepo = cuentaRepo;
 		this.detalleCuentaRepo = detalleCuentaRepo;
+		this.socioRepository=socioRepository;
 	}
 
 	public Cuenta save(Cuenta cuenta){
+		System.out.println("Identificacion: "+cuenta.getSocio().getIdentificacionSocio());
+		Socio sc = this.socioRepository.findByIdentificacion(cuenta.getSocio().getIdentificacionSocio());
+		cuenta.setSocio(sc);
+		System.out.println(sc + "/n"+cuenta);
 		return cuentaRepo.save(cuenta);
     }
-	
-	
-	public Optional<Cuenta> findById(int id) {
 
-		return cuentaRepo.findById(id);
-	}
-	
 	
 	public List<Cuenta> findAll(){
         return cuentaRepo.findAll();

@@ -10,21 +10,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  *
  * @author EstAdolfoSebastianJa
  */
 @Entity
-public class DetalleCredito implements Serializable{
-    
+public class DetalleCredito {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id",unique = true)
@@ -35,32 +28,9 @@ public class DetalleCredito implements Serializable{
     private double valorPago;
 	@Column(name = "estado", length = 255)
     private String estado;
-	
-    @ManyToOne
-    @JoinColumn(name = "creditoID")
-    @JsonBackReference 
-    private Credito creditoID;
 
-    public DetalleCredito() {
-    }
-
-    public DetalleCredito(int id, Date fechaPago, double valorPago, String estado, Credito creditoID) {
-        this.id = id;
-        this.fechaPago = fechaPago;
-        this.valorPago = valorPago;
-        this.estado = estado;
-        this.creditoID = creditoID;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Credito credito;
 
     public int getId() {
         return id;
@@ -86,20 +56,30 @@ public class DetalleCredito implements Serializable{
         this.valorPago = valorPago;
     }
 
-    public Credito getCreditoID() {
-        return creditoID;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setCreditoID(Credito creditoID) {
-        this.creditoID = creditoID;
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Credito getCredito() {
+        return credito;
+    }
+
+    public void setCredito(Credito credito) {
+        this.credito = credito;
     }
 
     @Override
     public String toString() {
-        return "DetalleCredito{" + "id=" + id + ", fechaPago=" + fechaPago + ", valorPago=" + valorPago + ", creditoID=" + creditoID + '}';
+        return "DetalleCredito{" +
+                "id=" + id +
+                ", fechaPago=" + fechaPago +
+                ", valorPago=" + valorPago +
+                ", estado='" + estado + '\'' +
+                ", credito=" + credito +
+                '}';
     }
-
-    
-
-
 }

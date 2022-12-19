@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Usuario", description = "Operaciones basicas de usuarios")
 public class UsuarioRestConroller {
 
-    @Autowired
     private UsuarioService usuariosService;
 
     public UsuarioRestConroller(UsuarioService usuariosService) {
