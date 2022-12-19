@@ -3,7 +3,7 @@ package ec.edu.ups.InstaWallet.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,7 @@ public class CuentaResController {
 		this.cuentaService = cuentaService;
 	}
 	
-	@PostMapping(value = "/cuenta" ,produces = "application/json",consumes = "application/json")
+	@PostMapping(value = "/" ,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Cuenta crearCuenta(Cuenta cuenta){
 		try {
 			return this.cuentaService.save(cuenta);
@@ -39,12 +39,12 @@ public class CuentaResController {
         
     }
 	
-	@GetMapping( value = "/listarCuentas",produces = "application/json")
+	@GetMapping( value = "/listarCuentas",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Cuenta> listarCuentas() {
         return this.cuentaService.findAll();
     }
 	
-	@PostMapping("/actualizarEstado")
+	@PostMapping(value = "/actualizarEstado", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "actualizar el estado de una Cuenta")
     public void actualizarEstado(@RequestParam Integer id, @RequestParam Boolean estado) {
 
@@ -55,7 +55,7 @@ public class CuentaResController {
         }
 	}
 	
-	@GetMapping("/listarAportaciones")
+	@GetMapping(value = "/listarAportaciones", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "devuelve un listado de las aportaciones de la cuenta")
 	public ArrayList<DetalleCuenta> listarAportaciones (@RequestParam Integer id){
 		

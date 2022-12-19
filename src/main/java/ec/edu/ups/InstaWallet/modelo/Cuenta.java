@@ -29,13 +29,13 @@ public class Cuenta {
 	
 	//@OneToMany(mappedBy = "cuentaI")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonManagedReference
+	//@JsonManagedReference
 	@JsonIgnore
 	private List<Credito> creditos;
 	
 	//@OneToMany(mappedBy = "cuentaID")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonManagedReference
+	//@JsonManagedReference
 	@JsonIgnore
 	private List<DetalleCuenta> detallesCuentas;
 
