@@ -27,7 +27,7 @@ public class DetalleCuentaRestController {
 		this.detalleCuentaService = detalleCuentaService;
 	}
 	
-	@PostMapping(value = "/detalleCuenta", consumes = {"*/*"})
+	@PostMapping(value = "/detalleCuenta", consumes = "*/*")
 	ResponseEntity <DetalleCuenta> agregarMovimiento(@Valid @RequestBody DetalleCuenta detalleCuenta){
 		System.out.println("Detalle recibido: "+detalleCuenta);
 		return new ResponseEntity<>(this.detalleCuentaService.save(detalleCuenta), HttpStatus.CREATED);

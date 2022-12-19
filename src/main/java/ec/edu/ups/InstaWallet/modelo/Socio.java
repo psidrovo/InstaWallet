@@ -23,9 +23,8 @@ public class Socio {
     @Column(name = "telefono_socio", length = 255)
     String telefonoSocio;
 
-
-
-    @OneToMany(mappedBy = "socio")
+    @OneToMany
+    @JoinColumn(name="id_socio")
     private List<Cuenta> cuentas;
 
     public Socio(){

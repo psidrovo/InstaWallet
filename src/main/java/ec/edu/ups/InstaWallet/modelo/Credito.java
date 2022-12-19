@@ -41,11 +41,9 @@ public class Credito{
 	@Column(name = "numero_cuotas_restantes", length = 255)
     private int numeroCuotasRestantes;
 
-    @OneToMany(mappedBy = "credito", cascade = CascadeType.ALL)
+    @OneToMany
+    @JoinColumn(name="id_credito")
     private List<DetalleCredito> detalleCreditoList;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Cuenta cuenta;
 
 
 
@@ -129,14 +127,6 @@ public class Credito{
         this.numeroCuotasRestantes = numeroCuotasRestantes;
     }
 
-    public Cuenta getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
-    }
-
     public List<DetalleCredito> getDetalleCreditoList() {
         return detalleCreditoList;
     }
@@ -158,7 +148,6 @@ public class Credito{
                 ", fechaInicio=" + fechaInicio +
                 ", fechaFinal=" + fechaFinal +
                 ", numeroCuotasRestantes=" + numeroCuotasRestantes +
-                ", cuenta=" + cuenta +
                 '}';
     }
 }

@@ -18,10 +18,8 @@ public class DetalleCuenta {
 	private Double valor;
 	@Column(name = "fecha", length = 255)
 	private LocalDate fecha;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	//@JoinColumn(name = "cunetaID", nullable = false, referencedColumnName = "numero_cuenta")
-	private Cuenta cuenta;
+	@Column(name = "id_cuenta", length = 255)
+	private String cuentaCodigo;
 
 
 	public int getId() {
@@ -66,13 +64,11 @@ public class DetalleCuenta {
 		this.id = id;
 	}
 
-
-	public Cuenta getCuenta() {
-		return cuenta;
+	public void setCuentaCodigo(String cuentaCodigo) {
+		this.cuentaCodigo = cuentaCodigo;
 	}
-
-	public void setCuenta(Cuenta cuenta) {
-		this.cuenta = cuenta;
+	public String getCuentaCodigo() {
+		return cuentaCodigo;
 	}
 
 	@Override
@@ -82,7 +78,7 @@ public class DetalleCuenta {
 				", tipoMovimiento='" + tipoMovimiento + '\'' +
 				", valor=" + valor +
 				", fecha=" + fecha +
-				", cuenta=" + cuenta +
+				", cuentaCodigo='" + cuentaCodigo + '\'' +
 				'}';
 	}
 }

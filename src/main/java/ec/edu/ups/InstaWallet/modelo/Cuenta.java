@@ -22,15 +22,16 @@ public class Cuenta {
 	private double monto;
 	@Column(name = "fecha_creacion", length = 255)
 	private LocalDate fechaCreacion;
-	
-	@OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
+	@Column(name = "id_socio", length = 255)
+	private String socioIdentificacion;
+	@OneToMany
+	@JoinColumn(name="id_cuenta")
 	private List<Credito> creditos;
 
-	@OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
+	@OneToMany
+	@JoinColumn(name="id_cuenta")
 	private List<DetalleCuenta> detallesCuentas;
 
-	@ManyToOne
-	private Socio socio;
 
 	public String getNumerCuenta() {
 		return numerCuenta;
@@ -56,7 +57,13 @@ public class Cuenta {
 		this.monto = monto;
 	}
 
+	public void setSocioIdentificacion(String socioIdentificacion) {
+		this.socioIdentificacion = socioIdentificacion;
+	}
 
+	public String getSocioIdentificacion() {
+		return socioIdentificacion;
+	}
 
 	public LocalDate getFechaCreacion() {
 		return fechaCreacion;
@@ -82,16 +89,6 @@ public class Cuenta {
 		this.detallesCuentas = detallesCuentas;
 	}
 
-
-
-	public Socio getSocio() {
-		return socio;
-	}
-
-	public void setSocio(Socio socio) {
-		this.socio = socio;
-	}
-
 	@Override
 	public String toString() {
 		return "Cuenta{" +
@@ -101,7 +98,6 @@ public class Cuenta {
 				", fechaCreacion=" + fechaCreacion +
 				", creditos=" + creditos +
 				", detallesCuentas=" + detallesCuentas +
-				", socio=" + socio +
 				'}';
 	}
 }

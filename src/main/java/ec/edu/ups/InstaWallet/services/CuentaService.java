@@ -29,10 +29,6 @@ public class CuentaService {
 	}
 
 	public Cuenta save(Cuenta cuenta){
-		System.out.println("Identificacion: "+cuenta.getSocio().getIdentificacionSocio());
-		Socio sc = this.socioRepository.findByIdentificacion(cuenta.getSocio().getIdentificacionSocio());
-		cuenta.setSocio(sc);
-		System.out.println(sc + "/n"+cuenta);
 		return cuentaRepo.save(cuenta);
     }
 

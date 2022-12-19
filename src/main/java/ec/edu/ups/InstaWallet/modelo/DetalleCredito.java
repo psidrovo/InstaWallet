@@ -28,9 +28,8 @@ public class DetalleCredito {
     private double valorPago;
 	@Column(name = "estado", length = 255)
     private String estado;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Credito credito;
+    @Column(name = "id_credito", length = 255)
+    private String creditoId;
 
     public int getId() {
         return id;
@@ -64,12 +63,12 @@ public class DetalleCredito {
         this.estado = estado;
     }
 
-    public Credito getCredito() {
-        return credito;
+    public String getCreditoId() {
+        return creditoId;
     }
 
-    public void setCredito(Credito credito) {
-        this.credito = credito;
+    public void setCreditoId(String creditoId) {
+        this.creditoId = creditoId;
     }
 
     @Override
@@ -79,7 +78,7 @@ public class DetalleCredito {
                 ", fechaPago=" + fechaPago +
                 ", valorPago=" + valorPago +
                 ", estado='" + estado + '\'' +
-                ", credito=" + credito +
+                ", creditoId='" + creditoId + '\'' +
                 '}';
     }
 }
