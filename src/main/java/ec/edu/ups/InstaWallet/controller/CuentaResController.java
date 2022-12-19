@@ -36,7 +36,8 @@ public class CuentaResController {
 		return new ResponseEntity<>(this.cuentaService.save(cuenta), HttpStatus.CREATED);
     }
 	
-	@GetMapping( value = "/listarCuentas",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping("/listarCuentas")
+	@Operation(summary = "Listar todas las Cuentas")
     public List<Cuenta> listarCuentas() {
         return this.cuentaService.findAll();
     }

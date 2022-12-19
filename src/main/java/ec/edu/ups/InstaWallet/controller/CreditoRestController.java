@@ -34,7 +34,7 @@ public class CreditoRestController {
 		this.creditoService = creditoService;
 	}
 	
-	@PostMapping(value = "/" , consumes = {"*/*"})
+	@PostMapping("/")
 	@Operation(summary = "Crear un credito")
 	public Credito crearCredito(@Valid @RequestBody Credito credito){
 		return creditoService.save(credito);

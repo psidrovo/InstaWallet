@@ -35,6 +35,7 @@ public class DetalleCuentaRestController {
     }
 	
 	@GetMapping( value = "/listar", produces = "application/json")
+	@Operation(summary = "Listar todas los detalles de cuentas")
     public List<DetalleCuenta> listarAportaciones() {
         return this.detalleCuentaService.findAll();
     }
