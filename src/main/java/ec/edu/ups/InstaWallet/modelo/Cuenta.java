@@ -33,6 +33,7 @@ public class Cuenta {
 	
 	@OneToMany(mappedBy = "cuentaID")
 	@JsonManagedReference
+
 	private List<DetalleCuenta> detallesCuentas;
 
 	@ManyToOne(cascade = CascadeType.ALL)
