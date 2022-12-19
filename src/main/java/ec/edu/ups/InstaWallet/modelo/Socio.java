@@ -25,9 +25,14 @@ public class Socio {
 
 
 
-    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
-
+    @OneToMany(mappedBy = "socio")
     private List<Cuenta> cuentas;
+
+    public Socio(){
+    }
+    public Socio(String identificacionSocio) {
+        this.identificacionSocio = identificacionSocio;
+    }
 
     public String getIdentificacionSocio() {
         return identificacionSocio;

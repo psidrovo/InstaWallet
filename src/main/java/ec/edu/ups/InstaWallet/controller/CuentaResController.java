@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ec.edu.ups.InstaWallet.services.SocioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,21 +21,17 @@ import javax.validation.Valid;
 @RequestMapping("/cuenta")
 @Tag(name = "Cuenta", description = "Operaciones de la clase Cuenta")
 public class CuentaResController {
-	
-	
-	private CuentaService cuentaService;
-	private SocioService socioService;
 
-	public CuentaResController(CuentaService cuentaService, SocioService socioService) {
+	private CuentaService cuentaService;
+
+	public CuentaResController(CuentaService cuentaService) {
 		this.cuentaService = cuentaService;
-		this.socioService = socioService;
 	}
-	
+
 	@PostMapping(value = "/" , consumes = {"*/*"})
 	@Operation(summary = "Crear una cuenta")
 	ResponseEntity<Cuenta> crearCuenta(@Valid @RequestBody Cuenta cuenta){
 		System.out.println("Cuenta recibida: " + cuenta);
-		this.socioService.crearSocio(cuenta.getSocio());
 		return new ResponseEntity<>(this.cuentaService.save(cuenta), HttpStatus.CREATED);
     }
 	
@@ -48,12 +45,12 @@ public class CuentaResController {
     public void actualizarEstado(@RequestParam Integer id, @RequestParam Boolean estado) {
 
         if (this.cuentaService.existsById(id)) {
-            var cuenta = this.cuentaService.findById(id).get();
+            var cuenta = this.cuentaService.findAll().get(id);
             cuenta.setEstado(estado);
             this.cuentaService.save(cuenta);
         }
 	}
-	
+	/*
 	@GetMapping(value = "/listarAportaciones", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "devuelve un listado de las aportaciones de la cuenta")
 	public ArrayList<DetalleCuenta> listarAportaciones (@RequestParam Integer id){
@@ -64,7 +61,7 @@ public class CuentaResController {
         }
 		
 		return null;
-	}
+	}*/
 	
 	
 }

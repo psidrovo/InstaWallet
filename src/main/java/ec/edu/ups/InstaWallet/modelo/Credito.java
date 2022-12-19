@@ -4,20 +4,10 @@
  */
 package ec.edu.ups.InstaWallet.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 
 /**
@@ -25,11 +15,12 @@ import javax.persistence.OneToMany;
  * @author EstAdolfoSebastianJa
  */
 @Entity
+@Table(name="credito")
 public class Credito{
     
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id",unique = true)
+	@Column(name = "id_credito",unique = true)
     private Integer id;
 	@Column(name = "estado_solicitud_credito", length = 255)
     private String estadoSolicitudCredito;
@@ -49,44 +40,20 @@ public class Credito{
     private Date fechaFinal;
 	@Column(name = "numero_cuotas_restantes", length = 255)
     private int numeroCuotasRestantes;
-    
-    @ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="cunetaI", nullable=false,referencedColumnName = "numero_cuenta")
-	private Cuenta cuentaI;
-    
-    
-    @OneToMany(mappedBy = "creditoID")
-    @JsonManagedReference
-    private List<DetalleCredito> detallesCredito;
+
+    @OneToMany(mappedBy = "credito", cascade = CascadeType.ALL)
+    private List<DetalleCredito> detalleCreditoList;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Cuenta cuenta;
 
 
-    public Credito(double valorCredito, int numeroDeCuotas) {
-        this.valorCredito = valorCredito;
-        this.numeroDeCuotas = numeroDeCuotas;
-    }
-
-
-    public double getInteres() {
-        return interes;
-    }
-
-    public void setInteres(double interes) {
-        this.interes = interes;
-    }
-
-    public int getNumeroDeCuotas() {
-        return numeroDeCuotas;
-    }
-
-    public void setNumeroDeCuotas(int numeroDeCuotas) {
-        this.numeroDeCuotas = numeroDeCuotas;
-    }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -114,12 +81,28 @@ public class Credito{
         this.valorCredito = valorCredito;
     }
 
+    public double getInteres() {
+        return interes;
+    }
+
+    public void setInteres(double interes) {
+        this.interes = interes;
+    }
+
     public double getCuotaCredito() {
         return cuotaCredito;
     }
 
     public void setCuotaCredito(double cuotaCredito) {
         this.cuotaCredito = cuotaCredito;
+    }
+
+    public int getNumeroDeCuotas() {
+        return numeroDeCuotas;
+    }
+
+    public void setNumeroDeCuotas(int numeroDeCuotas) {
+        this.numeroDeCuotas = numeroDeCuotas;
     }
 
     public Date getFechaInicio() {
@@ -146,30 +129,36 @@ public class Credito{
         this.numeroCuotasRestantes = numeroCuotasRestantes;
     }
 
-
-    public List<DetalleCredito> getDetallesCredito() {
-        return detallesCredito;
+    public Cuenta getCuenta() {
+        return cuenta;
     }
 
-    public void setDetallesCredito(List<DetalleCredito> detallesCredito) {
-        this.detallesCredito = detallesCredito;
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
     }
-    
-    public void anadirDetalleCredito(DetalleCredito detalle){
-        List<DetalleCredito> detalles = this.getDetallesCredito();
-        
-        detalles.add(detalle);
+
+    public List<DetalleCredito> getDetalleCreditoList() {
+        return detalleCreditoList;
+    }
+
+    public void setDetalleCreditoList(List<DetalleCredito> detalleCreditoList) {
+        this.detalleCreditoList = detalleCreditoList;
     }
 
     @Override
     public String toString() {
-        return "Credito{" + "id=" + id + ", estadoSolicitudCredito=" + estadoSolicitudCredito + 
-                ", estado=" + estado + ", valorCredito=" + valorCredito + ", cuotaCredito=" + 
-                cuotaCredito + ", fechaInicio=" + fechaInicio + ", fechaFinal=" + fechaFinal + 
+        return "Credito{" +
+                "id=" + id +
+                ", estadoSolicitudCredito='" + estadoSolicitudCredito + '\'' +
+                ", estado='" + estado + '\'' +
+                ", valorCredito=" + valorCredito +
+                ", interes=" + interes +
+                ", cuotaCredito=" + cuotaCredito +
+                ", numeroDeCuotas=" + numeroDeCuotas +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFinal=" + fechaFinal +
                 ", numeroCuotasRestantes=" + numeroCuotasRestantes +
-                ", detallesCredito=" + detallesCredito + '}';
+                ", cuenta=" + cuenta +
+                '}';
     }
-    
-    
-    
 }
