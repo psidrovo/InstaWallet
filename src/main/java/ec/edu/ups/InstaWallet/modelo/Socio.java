@@ -3,6 +3,8 @@ package ec.edu.ups.InstaWallet.modelo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
+
 /**
  *
  * @author Pidrovo
@@ -21,11 +23,11 @@ public class Socio {
     @Column(name = "telefono_socio", length = 255)
     String telefonoSocio;
 
-    /* Crear entidad Cuenta
+
     @OneToMany(mappedBy = "socio")
     @JsonManagedReference
     private List<Cuenta> payments;
-    */
+
 
     public String getIdentificacionSocio() {
         return identificacionSocio;

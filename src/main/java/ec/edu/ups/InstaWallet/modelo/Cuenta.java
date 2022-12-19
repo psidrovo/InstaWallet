@@ -3,11 +3,7 @@ package ec.edu.ups.InstaWallet.modelo;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -30,8 +26,10 @@ public class Cuenta {
 	@OneToMany(mappedBy = "cuentaID")
 	@JsonManagedReference
 	private List<DetalleCuenta> detallesCuentas;
-	
-	
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="socio_id", nullable=false,referencedColumnName = "identificacion_socio")
+	private Socio socio;
 
 	public Cuenta() {
 		
