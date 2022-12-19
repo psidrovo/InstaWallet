@@ -53,39 +53,5 @@ public class DetalleCreditoService {
         return detalleCreditoRepo.findAll();
     }
 	
-	
-    
-    /*@Autowired
-    private CreditoRepo creditoRepo;
-
-    private DetalleCredito detalleCredito;
-
-    @GetMapping("/all")
-    @Operation(summary = "Encuentra todos los detalles de los créditos existentes")
-    
-
-    @PostMapping("/save")
-    @Operation(summary = "Crear un detalle correspondiente a un crédito")
-    public DetalleCredito save(@RequestParam double valorPago, @RequestParam int creditoId) {
-
-        var credito = creditoRepo.findById(creditoId).get();
-
-        if (credito != null) {
-            credito.setNumeroCuotasRestantes(credito.getNumeroCuotasRestantes() - 1);
-            creditoRepo.save(credito);
-            var det = new DetalleCredito(0, new Date(), valorPago, "Pagado", credito);
-
-            return detalleCreditoRepo.save(det);
-        }
-        return null;
-    }
-
-    @GetMapping("/existe{id}")
-    @Operation(summary = "Comprobar que existe un detalle credito en particular")
-    
-
-    @GetMapping("/find{id}")
-    @Operation(summary = "Buscar un crédito en particular")
-    */
 
 }
