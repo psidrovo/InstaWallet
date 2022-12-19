@@ -24,11 +24,9 @@ public class Socio {
     String telefonoSocio;
 
     
-    //@OneToMany(mappedBy = "socio")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "socio")
     @JsonManagedReference
-    @JsonIgnore
-    private List<Cuenta> payments;
+    private List<Cuenta> cuentas;
 
     public String getIdentificacionSocio() {
         return identificacionSocio;
@@ -62,14 +60,13 @@ public class Socio {
         this.telefonoSocio = telefonoSocio;
     }
 
-    public List<Cuenta> getPayments() {
-        return payments;
+    public List<Cuenta> getCuentas() {
+        return cuentas;
     }
 
-    public void setPayments(List<Cuenta> payments) {
-        this.payments = payments;
+    public void setCuentas(List<Cuenta> cuentas) {
+        this.cuentas = cuentas;
     }
-
 
     @Override
     public String toString() {
@@ -78,7 +75,7 @@ public class Socio {
                 ", nombreSocio='" + nombreSocio + '\'' +
                 ", correoSocio='" + correoSocio + '\'' +
                 ", telefonoSocio='" + telefonoSocio + '\'' +
-                ", payments=" + payments +
+                ", cuentas=" + cuentas +
                 '}';
     }
 }

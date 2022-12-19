@@ -27,19 +27,15 @@ public class Cuenta {
 	@Column(name = "fecha_creacion", length = 255)
 	private LocalDate fechaCreacion;
 	
-	//@OneToMany(mappedBy = "cuentaI")
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "cuentaI")
 	@JsonManagedReference
-	@JsonIgnore
 	private List<Credito> creditos;
 	
-	//@OneToMany(mappedBy = "cuentaID")
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "cuentaID")
 	@JsonManagedReference
-	@JsonIgnore
 	private List<DetalleCuenta> detallesCuentas;
 
-	@ManyToOne(cascade = CascadeType.ALL,optional = false)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="socio_id", nullable=false,referencedColumnName = "identificacion_socio")
 	private Socio socio;
 
