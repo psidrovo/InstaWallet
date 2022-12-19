@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,9 +41,8 @@ public class Credito{
     private Date fechaFinal;
     private int numeroCuotasRestantes;
     
-    @ManyToOne
-	@JoinColumn(name = "cuentaI")
-	@JsonBackReference 
+    @ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="cunetaI", nullable=false,referencedColumnName = "id")
 	private Cuenta cuentaI;
     
     

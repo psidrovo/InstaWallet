@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/socio")
 public class SocioRestController {
 
-    @Autowired
+   
     private SocioService socioService;
 
     public SocioRestController(SocioService socioService) {

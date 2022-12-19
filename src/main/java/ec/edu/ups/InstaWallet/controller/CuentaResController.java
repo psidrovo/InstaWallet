@@ -20,19 +20,26 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Cuenta", description = "Operaciones de la clase Cuenta")
 public class CuentaResController {
 	
-	@Autowired
+	
 	private CuentaService cuentaService;
 
 	public CuentaResController(CuentaService cuentaService) {
 		this.cuentaService = cuentaService;
 	}
 	
-	@PostMapping(value = "/cuenta")
+	@PostMapping(value = "/cuenta" ,produces = "application/json",consumes = "application/json")
 	public Cuenta crearCuenta(Cuenta cuenta){
-        return this.cuentaService.save(cuenta);
+		try {
+			return this.cuentaService.save(cuenta);
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		
+        
     }
 	
-	@GetMapping( value = "/listarCuentas")
+	@GetMapping( value = "/listarCuentas",produces = "application/json")
     public List<Cuenta> listarCuentas() {
         return this.cuentaService.findAll();
     }

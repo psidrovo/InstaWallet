@@ -1,10 +1,11 @@
 package ec.edu.ups.InstaWallet.modelo;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -17,19 +18,23 @@ public class Cuenta {
 	private String numerCuenta;
 	private boolean estado;
 	private double monto;
-	private Date fechaCreacion;
+	private LocalDate fechaCreacion;
 	
-	@OneToMany(mappedBy = "cuentaI")
-	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER )
+	@JoinColumn(name="socio_id", nullable=true,referencedColumnName = "identificacion_socio")
+	private Socio socio;
+	
+	//@OneToMany(mappedBy = "cuentaI")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Credito> creditos;
 	
-	@OneToMany(mappedBy = "cuentaID")
-	@JsonManagedReference
+	//@OneToMany(mappedBy = "cuentaID")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<DetalleCuenta> detallesCuentas;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="socio_id", nullable=false,referencedColumnName = "identificacion_socio")
-	private Socio socio;
+	
 
 	public Cuenta() {
 		
@@ -68,11 +73,13 @@ public class Cuenta {
 		this.monto = monto;
 	}
 
-	public Date getFechaCreacion() {
+	
+
+	public LocalDate getFechaCreacion() {
 		return fechaCreacion;
 	}
 
-	public void setFechaCreacion(Date fechaCreacion) {
+	public void setFechaCreacion(LocalDate fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 
@@ -80,24 +87,35 @@ public class Cuenta {
 		return creditos;
 	}
 
-	public void setCreditos(List<Credito> creditos) {
+	/*public void setCreditos(List<Credito> creditos) {
 		this.creditos = creditos;
-	}
+	}*/
 
 	public List<DetalleCuenta> getDetallesCuentas() {
 		return detallesCuentas;
 	}
 
-	public void setDetallesCuentas(List<DetalleCuenta> detallesCuentas) {
+	/*public void setDetallesCuentas(List<DetalleCuenta> detallesCuentas) {
 		this.detallesCuentas = detallesCuentas;
+	}*/
+	
+	
+
+	/*public Socio getSocio() {
+		return socio;
 	}
+
+	public void setSocio(Socio socio) {
+		this.socio = socio;
+	}*/
 
 	@Override
 	public String toString() {
 		return "Cuenta [id=" + id + ", numerCuenta=" + numerCuenta + ", estado=" + estado + ", monto=" + monto
-				+ ", fechaCreacion=" + fechaCreacion + ", creditos=" + creditos + ", detallesCuentas=" + detallesCuentas
-				+ "]";
+				+ ", fechaCreacion=" + fechaCreacion + ", socio=" + socio + ", creditos=" + creditos
+				+ ", detallesCuentas=" + detallesCuentas + "]";
 	}
+
 	
 	
 

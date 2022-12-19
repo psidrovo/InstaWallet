@@ -1,15 +1,14 @@
 package ec.edu.ups.InstaWallet.modelo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class DetalleCuenta {
@@ -20,27 +19,16 @@ public class DetalleCuenta {
 	 
 	 private String tipoMovimiento;
 	 private Double valor;
-	 private Date fecha;
+	 private LocalDate fecha;
 	 
-	 @ManyToOne
-	 @JoinColumn(name = "cuentaID")
-	 @JsonBackReference 
+	 @ManyToOne(cascade = CascadeType.ALL)
+	 @JoinColumn(name="cunetaID", nullable=false,referencedColumnName = "id")
 	 private Cuenta cuentaID;
 	 
 	 
 	 
 
 	public DetalleCuenta() {
-	}
-	
-	
-
-	public DetalleCuenta(int id, String tipoMovimiento, Double valor, Date fecha, Cuenta cuentaID) {
-		this.id = id;
-		this.tipoMovimiento = tipoMovimiento;
-		this.valor = valor;
-		this.fecha = fecha;
-		this.cuentaID = cuentaID;
 	}
 
 
@@ -69,13 +57,25 @@ public class DetalleCuenta {
 		this.valor = valor;
 	}
 
-	public Date getFecha() {
+	
+
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+
+
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 
 	public Cuenta getCuentaID() {
 		return cuentaID;

@@ -23,8 +23,9 @@ public class Socio {
     @Column(name = "telefono_socio", length = 255)
     String telefonoSocio;
 
-
-    @OneToMany(mappedBy = "socio")
+    
+    //@OneToMany(mappedBy = "socio")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Cuenta> payments;
 
