@@ -4,15 +4,18 @@
  */
 package ec.edu.ups.InstaWallet.test;
 
+import ec.edu.ups.InstaWallet.controller.CreditoRestController;
 import ec.edu.ups.InstaWallet.modelo.Credito;
+import ec.edu.ups.InstaWallet.modelo.DetalleCredito;
 import ec.edu.ups.InstaWallet.services.CreditoService;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,7 +23,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -29,54 +31,93 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  *
  * @author EstAdolfoSebastianJa
  */
-@SpringBootTest
-public class CreditoServiceTest {
-
-    //private List<Credito> listCreditos = new ArrayList<>();
-
+public class CreditoControllerTest {
+/*
+    @Autowired
+    private CreditoRestController creditoRestController;
+    
+    @Autowired
+    private CreditoService creditoService;
+    
+    @Autowired
+    private CreditoRepo creditoRepo;*/
+    
     @InjectMocks
-    CreditoService creditoService;
-
+    CreditoRestController creditoRestController;
+    
     @Mock
-    CreditoRepo creditoRepo;
-
+    CreditoService creditoService;
+       
+    
     @BeforeEach
-    public void init() {
+    public void init(){
         MockitoAnnotations.openMocks(this);
+        
     }
 
+   /* @ParameterizedTest
+    @MethodSource("generator")
+    public void shouldCreateContact(Credito cre) {
+        System.out.println(cre.toString());
+        
+        CreditoService creditoService = new CreditoService(creditoRepo);
+        CreditoRestController creditoRestController = new CreditoRestController(creditoService);
+        
+        Credito creditoGuardado = creditoRestController.crearCredito(cre);
+        System.out.println(creditoGuardado);
+        assertTrue(creditoGuardado.equals(cre));
+
+    }*/
+    
+    
     @ParameterizedTest
     @MethodSource("generator")
-    public void saveCredito(Credito cre) {
+    public void crearCredito(Credito cre){
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-
+        
         when(creditoService.save(any(Credito.class))).thenReturn(cre);
-
-        Credito response = creditoService.save(cre);
-
+        
+        Credito response = creditoRestController.crearCredito(cre);
+        
         assertTrue(response.equals(cre));
-
+        
     }
     
-    
-    @ParameterizedTest
-    @MethodSource("generator")
-    public void findByIdCredito(Credito cre) {
+    @Test
+    public void testTablaAmortizacion(){
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+               
+        ArrayList<DetalleCredito> response = creditoRestController.generarTablaAmortizacion(12, new Date(), 1000.00);
+        
+        assertTrue(response.size() == 12);
+        
+    }
+
+    @Test
+    public void testAprobarRechazarCredito(){
+
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-        when(creditoService.findById(cre.getId())).thenReturn(cre);
 
-        boolean response = creditoService.existsById(cre.getId());
+        creditoRestController.aprobarRechazarCredito(1, "Aprobar");
 
-        assertTrue(response);
+        if (creditoService.existsById(1)){
+            Optional<Credito> c = creditoService.findById(1);
+
+            assertTrue(c.get().getEstado().equals("Activo"));
+        } else {
+            assertFalse(creditoService.existsById(1));
+        }
 
     }
     
-
+    
+    // and then somewhere in this test class  
     static Stream<Credito> generator() {
-
+        
         Credito cre = new Credito();
         cre.setId(1);
         cre.setCuotaCredito(145);
@@ -90,8 +131,9 @@ public class CreditoServiceTest {
         cre.setValorCredito(10000.00);
 
         return Stream.of(
-                cre
+            cre     
         );
 
     }
+
 }
