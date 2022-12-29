@@ -42,7 +42,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  *
  * @author EstAdolfoSebastianJa
  */
-public class CreditoServiceTest {
+public class CreditoControllerTest {
 /*
     @Autowired
     private CreditoRestController creditoRestController;

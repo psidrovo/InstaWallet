@@ -28,7 +28,7 @@ import ec.edu.ups.InstaWallet.modelo.DetalleCredito;
 import ec.edu.ups.InstaWallet.services.CuentaService;
 
 
-public class CuentaServiceTest {
+public class CuentaControllerTest {
 	@InjectMocks
     CuentaResController cuentaResController;
     
