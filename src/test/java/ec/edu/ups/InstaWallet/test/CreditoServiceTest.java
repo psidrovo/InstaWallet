@@ -6,9 +6,11 @@ package ec.edu.ups.InstaWallet.test;
 
 import ec.edu.ups.InstaWallet.controller.CreditoRestController;
 import ec.edu.ups.InstaWallet.modelo.Credito;
+import ec.edu.ups.InstaWallet.modelo.DetalleCredito;
 import ec.edu.ups.InstaWallet.repository.CreditoRepo;
 import ec.edu.ups.InstaWallet.services.CreditoService;
 import io.swagger.v3.oas.annotations.servers.Server;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.stream.Stream;
 import javax.transaction.Transactional;
@@ -80,7 +82,7 @@ public class CreditoServiceTest {
     
     @ParameterizedTest
     @MethodSource("generator")
-    public void crearTest(Credito cre){
+    public void crearCredito(Credito cre){
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         
@@ -89,6 +91,17 @@ public class CreditoServiceTest {
         Credito response = creditoRestController.crearCredito(cre);
         
         assertTrue(response.equals(cre));
+        
+    }
+    
+    @Test
+    public void testTablaAmortizacion(){
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+               
+        ArrayList<DetalleCredito> response = creditoRestController.generarTablaAmortizacion(12, new Date(), 1000.00);
+        
+        assertTrue(response.size() == 12);
         
     }
     
