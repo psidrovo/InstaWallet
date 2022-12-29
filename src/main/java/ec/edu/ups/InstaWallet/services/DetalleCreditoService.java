@@ -4,7 +4,6 @@
  */
 package ec.edu.ups.InstaWallet.services;
 
-
 import ec.edu.ups.InstaWallet.modelo.DetalleCredito;
 import ec.edu.ups.InstaWallet.repository.DetalleCreditoRepo;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,29 +29,26 @@ public class DetalleCreditoService {
     @Autowired
     private DetalleCreditoRepo detalleCreditoRepo;
 
-	public DetalleCreditoService(DetalleCreditoRepo detalleCreditoRepo) {
-		this.detalleCreditoRepo = detalleCreditoRepo;
-	}
-	
-	public DetalleCredito save(DetalleCredito detalleCredito){
-		return detalleCreditoRepo.save(detalleCredito);
+    public DetalleCreditoService(DetalleCreditoRepo detalleCreditoRepo) {
+        this.detalleCreditoRepo = detalleCreditoRepo;
     }
-	
-	public boolean existsById(int id) {
+
+    public DetalleCredito save(DetalleCredito detalleCredito) {
+        return detalleCreditoRepo.save(detalleCredito);
+    }
+
+    public boolean existsById(int id) {
         Optional<DetalleCredito> cre = detalleCreditoRepo.findById(id);
 
         return cre.isPresent();
     }
-	
-	public DetalleCredito findById(int id) {
-        DetalleCredito detalleCredito = detalleCreditoRepo.findById(id).get();
 
-        return detalleCredito;
+    public Optional<DetalleCredito> findById(int id) {
+        return detalleCreditoRepo.findById(id);
     }
-	
-	public List<DetalleCredito> findAll() {
+
+    public List<DetalleCredito> findAll() {
         return detalleCreditoRepo.findAll();
     }
-	
 
 }
