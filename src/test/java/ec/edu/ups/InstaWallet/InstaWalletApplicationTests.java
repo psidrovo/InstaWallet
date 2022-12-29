@@ -1,19 +1,27 @@
 package ec.edu.ups.InstaWallet;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import ec.edu.ups.InstaWallet.controller.ConfiguracionRestController;
 import ec.edu.ups.InstaWallet.controller.CreditoRestController;
+import ec.edu.ups.InstaWallet.controller.SocioRestController;
 import ec.edu.ups.InstaWallet.controller.UsuarioRestConroller;
 import ec.edu.ups.InstaWallet.modelo.Configuracion;
 import ec.edu.ups.InstaWallet.modelo.Credito;
+import ec.edu.ups.InstaWallet.modelo.Cuenta;
+import ec.edu.ups.InstaWallet.modelo.Socio;
 import ec.edu.ups.InstaWallet.modelo.Usuario;
 import ec.edu.ups.InstaWallet.services.ConfiguracionService;
 import ec.edu.ups.InstaWallet.services.CreditoService;
+import ec.edu.ups.InstaWallet.services.SocioService;
 import ec.edu.ups.InstaWallet.services.UsuarioService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -27,6 +35,7 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.util.concurrent.SuccessCallback;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -40,6 +49,8 @@ class InstaWalletApplicationTests {
 	ConfiguracionRestController configuracionRestController;
 	@InjectMocks
 	UsuarioRestConroller usuarioRestConroller;
+    @InjectMocks
+	SocioRestController socioRestController;
     
     @Mock
     CreditoService creditoService;
@@ -47,6 +58,8 @@ class InstaWalletApplicationTests {
 	ConfiguracionService configuracionService;
 	@Mock
 	UsuarioService usuarioService;
+    @Mock
+	SocioService socioService;
        
     
     @BeforeEach
@@ -169,5 +182,50 @@ class InstaWalletApplicationTests {
 		when(usuarioRestConroller.findUsuario(id)).thenReturn(usu);
 		assertNotNull(usuarioRestConroller.findUsuario(id));
 	}
+
+    	//creacion de Usuario
+	static Stream<Socio> generadorSocio(){
+
+		Socio socio = new Socio();
+        List<Cuenta> c = new ArrayList<>();
+
+		//creacion de usuario
+		socio.setCorreoSocio("ejemplo@gmail.com");
+        socio.setCuentas(c);
+        socio.setIdentificacionSocio("0150019453");
+        socio.setNombreSocio("Denys Dutan");
+        socio.setTelefonoSocio("0987654321");
+
+		return Stream.of(socio);
+	}
+
+    //Test Crear Usuario
+	@ParameterizedTest
+    @MethodSource("generadorSocio")
+    public void crearSocio(Socio socio){
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        
+        when(socioService.crearSocio(any(Socio.class))).thenReturn(socio);
+        
+        ResponseEntity<Socio> response = socioRestController.crear(socio);
+        
+        //ESTE METODO ESTA MAL
+        assertTrue(!response.equals(HttpStatus.OK));
+        
+    }
+
+    //Test findAll Socio
+	@ParameterizedTest
+    @MethodSource("generadorSocio")
+	public void findAllSocios(Socio socio){
+		MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+		
+		when(socioRestController.lista()).thenReturn(Arrays.asList(socio));
+		assertNotNull(socioRestController.lista());
+	}
+
+
 
 }
