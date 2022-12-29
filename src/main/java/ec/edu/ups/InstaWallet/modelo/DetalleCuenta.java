@@ -1,6 +1,7 @@
 package ec.edu.ups.InstaWallet.modelo;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -17,7 +18,7 @@ public class DetalleCuenta {
 	@Column(name = "valor", length = 255)
 	private Double valor;
 	@Column(name = "fecha", length = 255)
-	private LocalDate fecha;
+	private Date fecha;
 	@Column(name = "id_cuenta", length = 255)
 	private String cuentaCodigo;
 
@@ -48,13 +49,13 @@ public class DetalleCuenta {
 
 	
 
-	public LocalDate getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
 
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 

@@ -6,18 +6,22 @@ import org.springframework.http.ResponseEntity;
 
 import ec.edu.ups.InstaWallet.controller.ConfiguracionRestController;
 import ec.edu.ups.InstaWallet.controller.CreditoRestController;
+import ec.edu.ups.InstaWallet.controller.DetalleCuentaRestController;
 import ec.edu.ups.InstaWallet.controller.SocioRestController;
 import ec.edu.ups.InstaWallet.controller.UsuarioRestConroller;
 import ec.edu.ups.InstaWallet.modelo.Configuracion;
 import ec.edu.ups.InstaWallet.modelo.Credito;
 import ec.edu.ups.InstaWallet.modelo.Cuenta;
+import ec.edu.ups.InstaWallet.modelo.DetalleCuenta;
 import ec.edu.ups.InstaWallet.modelo.Socio;
 import ec.edu.ups.InstaWallet.modelo.Usuario;
 import ec.edu.ups.InstaWallet.services.ConfiguracionService;
 import ec.edu.ups.InstaWallet.services.CreditoService;
+import ec.edu.ups.InstaWallet.services.DetalleCuentaService;
 import ec.edu.ups.InstaWallet.services.SocioService;
 import ec.edu.ups.InstaWallet.services.UsuarioService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -51,6 +55,8 @@ class InstaWalletApplicationTests {
 	UsuarioRestConroller usuarioRestConroller;
     @InjectMocks
 	SocioRestController socioRestController;
+    @InjectMocks
+	DetalleCuentaRestController detalleCuentaRestController;
     
     @Mock
     CreditoService creditoService;
@@ -60,6 +66,8 @@ class InstaWalletApplicationTests {
 	UsuarioService usuarioService;
     @Mock
 	SocioService socioService;
+    @Mock
+	DetalleCuentaService detalleCuentaService;
        
     
     @BeforeEach
@@ -111,7 +119,7 @@ class InstaWalletApplicationTests {
 
 		//creacion de configuacion
 		confi.setNombreEmpresa("GOGO");
-		confi.setLogo("Tu lacer es nuestra meta");
+		confi.setLogo("Tu placer es nuestra meta");
 		confi.setCorreoEmpresa("gogo@gmail.com");
 
 		return Stream.of(confi);
@@ -210,7 +218,7 @@ class InstaWalletApplicationTests {
         
         ResponseEntity<Socio> response = socioRestController.crear(socio);
         
-        //ESTE METODO ESTA MAL
+        //ESTE METODO ESTA MAL PAUL ARREGLA 
         assertTrue(!response.equals(HttpStatus.OK));
         
     }
@@ -224,6 +232,30 @@ class InstaWalletApplicationTests {
 		
 		when(socioRestController.lista()).thenReturn(Arrays.asList(socio));
 		assertNotNull(socioRestController.lista());
+	}
+
+        	//creacion de Usuario
+	static Stream<DetalleCuenta> generadorDetalleCuenta(){
+
+		DetalleCuenta detalleCuenta = new DetalleCuenta();
+        detalleCuenta.setCuentaCodigo("001");
+        detalleCuenta.setFecha(new Date());
+        detalleCuenta.setId(1);
+        detalleCuenta.setTipoMovimiento("DEPOSITO");
+        detalleCuenta.setValor(250.00);
+
+		return Stream.of(detalleCuenta);
+	}
+
+     //Test findAll Detalle cuenta
+	@ParameterizedTest
+    @MethodSource("generadorDetalleCuenta")
+	public void findAlldetalleC(DetalleCuenta detalleCuenta){
+		MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+		
+		when(detalleCuentaRestController.listarAportaciones()).thenReturn(Arrays.asList(detalleCuenta));
+		assertNotNull(detalleCuentaRestController.listarAportaciones());
 	}
 
 
