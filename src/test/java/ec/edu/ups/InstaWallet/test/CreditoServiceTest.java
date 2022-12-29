@@ -8,14 +8,17 @@ import ec.edu.ups.InstaWallet.modelo.Credito;
 import ec.edu.ups.InstaWallet.repository.CreditoRepo;
 import ec.edu.ups.InstaWallet.services.CreditoService;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import static org.mockito.ArgumentMatchers.any;
@@ -36,7 +39,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class CreditoServiceTest {
 
     //private List<Credito> listCreditos = new ArrayList<>();
-
     @InjectMocks
     CreditoService creditoService;
 
@@ -61,8 +63,7 @@ public class CreditoServiceTest {
         assertTrue(response.equals(cre));
 
     }
-    
-    
+
     @ParameterizedTest
     @MethodSource("generator")
     public void findByIdCredito(Credito cre) {
@@ -77,7 +78,48 @@ public class CreditoServiceTest {
         assertNull(response);
 
     }
-    
+
+    @ParameterizedTest
+    @MethodSource("generator")
+    public void findAllUsuarios(Credito cre) {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+        when(creditoService.findAll()).thenReturn(Arrays.asList(cre));
+        assertNotNull(creditoService.findAll());
+    }
+
+    @ParameterizedTest
+    @MethodSource("generator")
+    public void calcularPagoMensual(Credito cre) {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+        CreditoService mock = org.mockito.Mockito.mock(CreditoService.class);
+
+        when(mock.calcularPagoMensual(cre.getValorCredito(), cre.getNumeroDeCuotas())).thenReturn(100.0);
+
+        double response = creditoService.calcularPagoMensual(cre.getValorCredito(), cre.getNumeroDeCuotas());
+
+        assertNotNull(response);
+
+    }
+
+    @ParameterizedTest
+    @MethodSource("generator")
+    public void calculoInteres(Credito cre) {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+        CreditoService mock = org.mockito.Mockito.mock(CreditoService.class);
+
+        when(mock.calculoInteres(cre.getValorCredito())).thenReturn(0.05);
+
+        double response = creditoService.calculoInteres(cre.getValorCredito());
+
+        assertTrue(response == 0.05);
+
+    }
 
     static Stream<Credito> generator() {
 
