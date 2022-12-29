@@ -5,6 +5,7 @@
 package ec.edu.ups.InstaWallet.test;
 
 import ec.edu.ups.InstaWallet.modelo.Credito;
+import ec.edu.ups.InstaWallet.repository.CreditoRepo;
 import ec.edu.ups.InstaWallet.services.CreditoService;
 import java.util.ArrayList;
 import java.util.Date;
