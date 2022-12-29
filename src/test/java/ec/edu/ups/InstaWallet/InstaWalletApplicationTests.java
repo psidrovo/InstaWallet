@@ -1,6 +1,5 @@
 package ec.edu.ups.InstaWallet;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import ec.edu.ups.InstaWallet.controller.ConfiguracionRestController;
@@ -13,12 +12,10 @@ import ec.edu.ups.InstaWallet.services.ConfiguracionService;
 import ec.edu.ups.InstaWallet.services.CreditoService;
 import ec.edu.ups.InstaWallet.services.UsuarioService;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,8 +29,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import antlr.collections.List;
 
 
 @SpringBootTest
@@ -137,6 +132,7 @@ class InstaWalletApplicationTests {
 		return Stream.of(usu);
 	}
 
+	//Test Crear Usuario
 	@ParameterizedTest
     @MethodSource("generadorUsuario")
     public void crearUsuario(Usuario usu){
@@ -151,6 +147,7 @@ class InstaWalletApplicationTests {
         
     }
 
+	//Test findAll Usuario
 	@ParameterizedTest
     @MethodSource("generadorUsuario")
 	public void findAllUsuarios(Usuario usu){
@@ -161,6 +158,7 @@ class InstaWalletApplicationTests {
 		assertNotNull(usuarioRestConroller.findAll());
 	}
 
+	//test findByIdUsuario
 	@ParameterizedTest
     @MethodSource("generadorUsuario")
 	public void findByIdUsuarios(Usuario usu){
