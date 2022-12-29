@@ -1,12 +1,10 @@
 package ec.edu.ups.InstaWallet.controller;
 
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.validation.Valid;
-
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,19 +24,20 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/credito")
 @Tag(name = "Credito", description = "Operaciones de la clase Crédito")
 public class CreditoRestController {
-	
-	private CreditoService creditoService;
-	private Credito credito;
 
-	public CreditoRestController(CreditoService creditoService) {
-		this.creditoService = creditoService;
-	}
-	
-	@PostMapping("/")
-	@Operation(summary = "Crear un credito")
-	public Credito crearCredito(@Valid @RequestBody Credito credito){
-		return creditoService.save(credito);
+    private CreditoService creditoService;
+    private Credito credito;
+
+    public CreditoRestController(CreditoService creditoService) {
+        this.creditoService = creditoService;
     }
+
+    @PostMapping("/")
+    @Operation(summary = "Crear un credito")
+    public Credito crearCredito(@Valid @RequestBody Credito credito) {
+        return creditoService.save(credito);
+    }
+
     @PostMapping("/aprobar-rechazar-credito")
     @Operation(summary = "Aprobar o rechazar un crédito")
     public void aprobarRechazarCredito(@RequestParam Integer id, @RequestParam String aprobarRechazar) {
@@ -69,8 +68,8 @@ public class CreditoRestController {
 
         }
     }
-	
-	@GetMapping("/tabla-amortizacion")
+
+    @GetMapping("/tabla-amortizacion")
     @Operation(summary = "Crear una tabla de amortización")
     public ArrayList<DetalleCredito> generarTablaAmortizacion(@RequestParam int numeroDeCuotas,
             @RequestParam Date fechaInicio,
@@ -97,8 +96,8 @@ public class CreditoRestController {
 
         return listaPagos;
     }
-	
-	public Date generarFechaPago(int numeroCuota) {
+
+    public Date generarFechaPago(int numeroCuota) {
 
         Calendar c = Calendar.getInstance();
 
@@ -121,7 +120,5 @@ public class CreditoRestController {
 
         credito.setEstado(estado);
     }
-	
-	
 
 }

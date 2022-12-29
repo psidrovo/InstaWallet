@@ -33,7 +33,7 @@ public class UsuarioService {
     }
     
     public boolean verifyExistence(String id){
-        var cue = usuarioRepo.findById(id);
+        Optional<Usuario> cue = usuarioRepo.findById(id);
         
         return cue!=null;
     }

@@ -12,47 +12,44 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 /**
  *
  * @author EstAdolfoSebastianJa
  */
-
 @Service
 public class CreditoService {
 
     @Autowired
     private CreditoRepo creditoRepo;
-    
 
-	public CreditoService(CreditoRepo creditoRepo) {
-		this.creditoRepo = creditoRepo;
-	}
-	
-	public Credito save(Credito credito){
-		return creditoRepo.save(credito);
+    public CreditoService(CreditoRepo creditoRepo) {
+        this.creditoRepo = creditoRepo;
     }
-	
-	public boolean existsById(int id) {
-        var cre = creditoRepo.findById(id);
 
-        return !cre.isEmpty();
+    public Credito save(Credito credito) {
+        return creditoRepo.save(credito);
     }
-	public Optional<Credito> findById(int id) {
+
+    public boolean existsById(int id) {
+        Optional<Credito> cre = creditoRepo.findById(id);
+
+        return cre.isPresent();
+    }
+
+    public Optional<Credito> findById(int id) {
 
         return creditoRepo.findById(id);
     }
-	
-	public List<Credito> findAll() {
-	        return creditoRepo.findAll();
-	}
-	
-	public Credito update(Credito credito) {
+
+    public List<Credito> findAll() {
+        return creditoRepo.findAll();
+    }
+
+    public Credito update(Credito credito) {
         return creditoRepo.save(credito);
     }
-	
-	
-	public double calcularPagoMensual(double monto, double numeroDeCuotas) {
+
+    public double calcularPagoMensual(double monto, double numeroDeCuotas) {
         double pagoMensual = monto / numeroDeCuotas;
         double interes = calculoInteres(monto);
         double calucloPago = pagoMensual * interes;
@@ -79,15 +76,8 @@ public class CreditoService {
         }
         return interes;
     }
-	
-    
-    
-    
-    
-   
 
     /*
 
-    */
-
+     */
 }

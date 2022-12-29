@@ -10,6 +10,7 @@ import ec.edu.ups.InstaWallet.repository.DetalleCreditoRepo;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,13 +39,13 @@ public class DetalleCreditoService {
     }
 	
 	public boolean existsById(int id) {
-        var cre = detalleCreditoRepo.findById(id);
+        Optional<DetalleCredito> cre = detalleCreditoRepo.findById(id);
 
-        return !cre.isEmpty();
+        return cre.isPresent();
     }
 	
 	public DetalleCredito findById(int id) {
-        var detalleCredito = detalleCreditoRepo.findById(id).get();
+        DetalleCredito detalleCredito = detalleCreditoRepo.findById(id).get();
 
         return detalleCredito;
     }
