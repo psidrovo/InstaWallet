@@ -10,7 +10,9 @@ import ec.edu.ups.InstaWallet.services.CreditoService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -65,12 +67,13 @@ public class CreditoServiceTest {
     public void findByIdCredito(Credito cre) {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        Optional<Credito> t = null;
 
-        when(creditoService.findById(cre.getId())).thenReturn(cre);
+        when(creditoService.findById(cre.getId())).thenReturn(t);
 
-        boolean response = creditoService.existsById(cre.getId());
+        Optional<Credito> response = creditoService.findById(cre.getId());
 
-        assertTrue(response);
+        Assertions.assertNull(response);
 
     }
     
