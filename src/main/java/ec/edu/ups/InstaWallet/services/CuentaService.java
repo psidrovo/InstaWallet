@@ -1,9 +1,9 @@
 package ec.edu.ups.InstaWallet.services;
 
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
 
-import ec.edu.ups.InstaWallet.modelo.Socio;
+//import ec.edu.ups.InstaWallet.modelo.Socio;
 import ec.edu.ups.InstaWallet.repository.DetalleCuentaRepo;
 import ec.edu.ups.InstaWallet.repository.SocioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
