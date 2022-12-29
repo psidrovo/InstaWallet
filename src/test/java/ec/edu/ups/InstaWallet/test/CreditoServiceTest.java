@@ -115,9 +115,9 @@ public class CreditoServiceTest {
 
         when(mock.calculoInteres(cre.getValorCredito())).thenReturn(0.05);
 
-        double response = creditoService.calculoInteres(cre.getValorCredito());
+        double response = creditoService.calculoInteres(110000.00);
 
-        assertTrue(response == 0.05);
+        assertTrue(response == 0.1);
 
     }
 
