@@ -9,41 +9,57 @@ import java.util.List;
 
 import javax.persistence.*;
 
-
 /**
  *
  * @author EstAdolfoSebastianJa
  */
 @Entity
-@Table(name="credito")
-public class Credito{
-    
-	@Id
+@Table(name = "credito")
+public class Credito {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_credito",unique = true)
+    @Column(name = "id_credito", unique = true)
     private Integer id;
-	@Column(name = "estado_solicitud_credito", length = 255)
+    @Column(name = "estado_solicitud_credito", length = 255)
     private String estadoSolicitudCredito;
-	@Column(name = "estado", length = 255)
+    @Column(name = "estado", length = 255)
     private String estado;
-	@Column(name = "valor_credito", length = 255)
+    @Column(name = "valor_credito", length = 255)
     private double valorCredito;
-	@Column(name = "interes", length = 255)
+    @Column(name = "interes", length = 255)
     private double interes;
-	@Column(name = "cuota_credito", length = 255)
+    @Column(name = "cuota_credito", length = 255)
     private double cuotaCredito;
-	@Column(name = "numero_de_cuotas", length = 255)
+    @Column(name = "numero_de_cuotas", length = 255)
     private int numeroDeCuotas;
-	@Column(name = "fecha_inicio", length = 255)
+    @Column(name = "fecha_inicio", length = 255)
     private Date fechaInicio;
-	@Column(name = "fecha_final", length = 255)
+    @Column(name = "fecha_final", length = 255)
     private Date fechaFinal;
-	@Column(name = "numero_cuotas_restantes", length = 255)
+    @Column(name = "numero_cuotas_restantes", length = 255)
     private int numeroCuotasRestantes;
 
+    public Credito(Integer id, String estadoSolicitudCredito, String estado, double valorCredito, double interes, double cuotaCredito, int numeroDeCuotas, Date fechaInicio, Date fechaFinal, int numeroCuotasRestantes) {
+        this.id = id;
+        this.estadoSolicitudCredito = estadoSolicitudCredito;
+        this.estado = estado;
+        this.valorCredito = valorCredito;
+        this.interes = interes;
+        this.cuotaCredito = cuotaCredito;
+        this.numeroDeCuotas = numeroDeCuotas;
+        this.fechaInicio = fechaInicio;
+        this.fechaFinal = fechaFinal;
+        this.numeroCuotasRestantes = numeroCuotasRestantes;
+    }
+
     @OneToMany
-    @JoinColumn(name="id_credito")
+    @JoinColumn(name = "id_credito")
     private List<DetalleCredito> detalleCreditoList;
+
+    public Credito() {
+
+    }
 
     public Integer getId() {
         return id;
@@ -135,18 +151,18 @@ public class Credito{
 
     @Override
     public String toString() {
-        return "Credito{" +
-                "id=" + id +
-                ", estadoSolicitudCredito='" + estadoSolicitudCredito + '\'' +
-                ", estado='" + estado + '\'' +
-                ", valorCredito=" + valorCredito +
-                ", interes=" + interes +
-                ", cuotaCredito=" + cuotaCredito +
-                ", numeroDeCuotas=" + numeroDeCuotas +
-                ", fechaInicio=" + fechaInicio +
-                ", fechaFinal=" + fechaFinal +
-                ", numeroCuotasRestantes=" + numeroCuotasRestantes +
-                ", detalleCreditoList=" + detalleCreditoList +
-                '}';
+        return "Credito{"
+                + "id=" + id
+                + ", estadoSolicitudCredito='" + estadoSolicitudCredito + '\''
+                + ", estado='" + estado + '\''
+                + ", valorCredito=" + valorCredito
+                + ", interes=" + interes
+                + ", cuotaCredito=" + cuotaCredito
+                + ", numeroDeCuotas=" + numeroDeCuotas
+                + ", fechaInicio=" + fechaInicio
+                + ", fechaFinal=" + fechaFinal
+                + ", numeroCuotasRestantes=" + numeroCuotasRestantes
+                + ", detalleCreditoList=" + detalleCreditoList
+                + '}';
     }
 }

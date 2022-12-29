@@ -55,6 +55,7 @@ class InstaWalletApplicationTests {
         
     }
 
+    
     @ParameterizedTest
     @MethodSource("generator")
     public void crearTest(Credito cre){

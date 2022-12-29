@@ -7,6 +7,8 @@ package ec.edu.ups.InstaWallet.services;
 import ec.edu.ups.InstaWallet.modelo.Usuario;
 import ec.edu.ups.InstaWallet.repository.UsuarioRepo;
 import java.util.List;
+import java.util.Optional;
+
 //import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +35,7 @@ public class UsuarioService {
     }
     
     public boolean verifyExistence(String id){
-        var cue = usuarioRepo.findById(id);
+        Optional<Usuario> cue = usuarioRepo.findById(id);
         
         return cue!=null;
     }

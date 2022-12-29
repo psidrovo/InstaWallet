@@ -1,5 +1,6 @@
 package ec.edu.ups.InstaWallet.controller;
 
+import ec.edu.ups.InstaWallet.modelo.Credito;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -28,7 +29,7 @@ public class DetalleCreditoRestController {
 	@PostMapping("/")
 	@Operation(summary = "Crear un detalle credito")
 	public DetalleCredito crearDetalleCredito(@Valid @RequestBody DetalleCredito detalleCredito, @RequestParam int creditoId){
-		var credito = creditoService.findById(creditoId).get();
+		Credito credito = creditoService.findById(creditoId).get();
 		if (credito != null) {
             credito.setNumeroCuotasRestantes(credito.getNumeroCuotasRestantes() - 1);
             creditoService.save(credito);
