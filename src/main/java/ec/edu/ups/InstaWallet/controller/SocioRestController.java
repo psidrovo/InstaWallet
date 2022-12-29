@@ -25,13 +25,13 @@ public class SocioRestController {
     }
     @GetMapping("/")
     @Operation(summary = "Lista todos los socios disponibles")
-    List<Socio> lista(){
+    public List<Socio> lista(){
         return socioService.listarSocios();
     }
 
     @PostMapping("/")
     @Operation(summary = "Metodo de creacion de un Socio")
-    ResponseEntity<Socio> crear(@Valid @RequestBody Socio socio){
+    public ResponseEntity<Socio> crear(@Valid @RequestBody Socio socio){
         System.out.println("Socio ingresado: " +socio.toString());
         return new ResponseEntity<>(this.socioService.crearSocio(socio), HttpStatus.CREATED);
     }

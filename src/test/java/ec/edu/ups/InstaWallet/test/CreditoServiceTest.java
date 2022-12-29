@@ -5,14 +5,13 @@
 package ec.edu.ups.InstaWallet.test;
 
 import ec.edu.ups.InstaWallet.modelo.Credito;
-import ec.edu.ups.InstaWallet.repository.CreditoRepo;
 import ec.edu.ups.InstaWallet.services.CreditoService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
