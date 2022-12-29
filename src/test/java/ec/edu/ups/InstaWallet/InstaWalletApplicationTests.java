@@ -42,6 +42,7 @@ class InstaWalletApplicationTests {
         MockitoAnnotations.openMocks(this);
         
     }
+    
     @ParameterizedTest
     @MethodSource("generator")
     public void crearTest(Credito cre){

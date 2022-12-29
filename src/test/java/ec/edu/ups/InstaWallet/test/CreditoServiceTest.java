@@ -12,6 +12,7 @@ import ec.edu.ups.InstaWallet.services.CreditoService;
 import io.swagger.v3.oas.annotations.servers.Server;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 import java.util.stream.Stream;
 import javax.transaction.Transactional;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -103,6 +104,25 @@ public class CreditoServiceTest {
         
         assertTrue(response.size() == 12);
         
+    }
+
+    @Test
+    public void testAprobarRechazarCredito(){
+
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+
+        creditoRestController.aprobarRechazarCredito(1, "Aprobar");
+
+        if (creditoService.existsById(1)){
+            Optional<Credito> c = creditoService.findById(1);
+
+            assertTrue(c.get().getEstado().equals("Activo"));
+        } else {
+            assertFalse(creditoService.existsById(1));
+        }
+
     }
     
     
