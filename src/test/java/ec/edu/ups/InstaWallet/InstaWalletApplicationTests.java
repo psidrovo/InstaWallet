@@ -6,22 +6,25 @@ import org.springframework.http.ResponseEntity;
 
 import ec.edu.ups.InstaWallet.controller.ConfiguracionRestController;
 import ec.edu.ups.InstaWallet.controller.CreditoRestController;
+import ec.edu.ups.InstaWallet.controller.DetalleCreditoRestController;
 import ec.edu.ups.InstaWallet.controller.DetalleCuentaRestController;
 import ec.edu.ups.InstaWallet.controller.SocioRestController;
 import ec.edu.ups.InstaWallet.controller.UsuarioRestConroller;
 import ec.edu.ups.InstaWallet.modelo.Configuracion;
 import ec.edu.ups.InstaWallet.modelo.Credito;
 import ec.edu.ups.InstaWallet.modelo.Cuenta;
+import ec.edu.ups.InstaWallet.modelo.DetalleCredito;
 import ec.edu.ups.InstaWallet.modelo.DetalleCuenta;
 import ec.edu.ups.InstaWallet.modelo.Socio;
 import ec.edu.ups.InstaWallet.modelo.Usuario;
 import ec.edu.ups.InstaWallet.services.ConfiguracionService;
 import ec.edu.ups.InstaWallet.services.CreditoService;
+import ec.edu.ups.InstaWallet.services.DetalleCreditoService;
 import ec.edu.ups.InstaWallet.services.DetalleCuentaService;
 import ec.edu.ups.InstaWallet.services.SocioService;
 import ec.edu.ups.InstaWallet.services.UsuarioService;
 
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -39,7 +42,7 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.util.concurrent.SuccessCallback;
+//import org.springframework.util.concurrent.SuccessCallback;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -57,7 +60,9 @@ class InstaWalletApplicationTests {
 	SocioRestController socioRestController;
     @InjectMocks
 	DetalleCuentaRestController detalleCuentaRestController;
-    
+    @InjectMocks
+	DetalleCreditoRestController detalleCreditoRestController;
+
     @Mock
     CreditoService creditoService;
 	@Mock
@@ -68,6 +73,8 @@ class InstaWalletApplicationTests {
 	SocioService socioService;
     @Mock
 	DetalleCuentaService detalleCuentaService;
+    @Mock
+	DetalleCreditoService detalleCreditoService;
        
     
     @BeforeEach
@@ -256,6 +263,30 @@ class InstaWalletApplicationTests {
 		
 		when(detalleCuentaRestController.listarAportaciones()).thenReturn(Arrays.asList(detalleCuenta));
 		assertNotNull(detalleCuentaRestController.listarAportaciones());
+	}
+
+    static Stream<DetalleCredito> generatorDetalleCredito() {
+
+        DetalleCredito cre = new DetalleCredito();
+        cre.setId(1);
+        cre.setFechaPago(new Date());
+        cre.setValorPago(100.0);
+        cre.setEstado("Pagado");
+
+        return Stream.of(
+                cre
+        );
+
+    }
+
+    @ParameterizedTest
+    @MethodSource("generatorDetalleCredito")
+	public void findAlldetalleCredito(DetalleCredito detalleCredito){
+		MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+		
+		when(detalleCreditoRestController.listarDetallesCuentas()).thenReturn(Arrays.asList(detalleCredito));
+		assertNotNull(detalleCreditoRestController.listarDetallesCuentas());
 	}
 
 

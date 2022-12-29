@@ -4,11 +4,11 @@
  */
 package ec.edu.ups.InstaWallet.test;
 
-import ec.edu.ups.InstaWallet.modelo.Credito;
+//import ec.edu.ups.InstaWallet.modelo.Credito;
 import ec.edu.ups.InstaWallet.modelo.DetalleCredito;
-import ec.edu.ups.InstaWallet.repository.CreditoRepo;
+//import ec.edu.ups.InstaWallet.repository.CreditoRepo;
 import ec.edu.ups.InstaWallet.repository.DetalleCreditoRepo;
-import ec.edu.ups.InstaWallet.services.CreditoService;
+//import ec.edu.ups.InstaWallet.services.CreditoService;
 import ec.edu.ups.InstaWallet.services.DetalleCreditoService;
 import java.util.Arrays;
 import java.util.Date;

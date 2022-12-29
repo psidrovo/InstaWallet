@@ -1,6 +1,6 @@
 package ec.edu.ups.InstaWallet.modelo;
 
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.*;
