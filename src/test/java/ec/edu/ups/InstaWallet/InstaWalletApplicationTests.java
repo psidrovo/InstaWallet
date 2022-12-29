@@ -3,11 +3,23 @@ package ec.edu.ups.InstaWallet;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import ec.edu.ups.InstaWallet.controller.ConfiguracionRestController;
 import ec.edu.ups.InstaWallet.controller.CreditoRestController;
+import ec.edu.ups.InstaWallet.controller.UsuarioRestConroller;
+import ec.edu.ups.InstaWallet.modelo.Configuracion;
 import ec.edu.ups.InstaWallet.modelo.Credito;
+import ec.edu.ups.InstaWallet.modelo.Usuario;
+import ec.edu.ups.InstaWallet.services.ConfiguracionService;
 import ec.edu.ups.InstaWallet.services.CreditoService;
+import ec.edu.ups.InstaWallet.services.UsuarioService;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,20 +33,25 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import antlr.collections.List;
+
 
 @SpringBootTest
 class InstaWalletApplicationTests {
 
-	@Test
-	public void testConfiguracion() {
-		
-	}
-
 	@InjectMocks
     CreditoRestController creditoRestController;
+	@InjectMocks
+	ConfiguracionRestController configuracionRestController;
+	@InjectMocks
+	UsuarioRestConroller usuarioRestConroller;
     
     @Mock
     CreditoService creditoService;
+	@Mock
+	ConfiguracionService configuracionService;
+	@Mock
+	UsuarioService usuarioService;
        
     
     @BeforeEach
@@ -42,6 +59,7 @@ class InstaWalletApplicationTests {
         MockitoAnnotations.openMocks(this);
         
     }
+
     @ParameterizedTest
     @MethodSource("generator")
     public void crearTest(Credito cre){
@@ -56,11 +74,10 @@ class InstaWalletApplicationTests {
         
     }
     
-    
-    // and then somewhere in this test class  
     static Stream<Credito> generator() {
         
         Credito cre = new Credito();
+		//creacion de credito
         cre.setId(1);
         cre.setCuotaCredito(145);
         cre.setEstado("en espera");
@@ -73,9 +90,85 @@ class InstaWalletApplicationTests {
         cre.setValorCredito(10000.00);
 
         return Stream.of(
-            cre     
+            cre    
         );
-
     }
+
+
+	//creacion de configuracion
+	static Stream<Configuracion> generadorConfig(){
+
+		Configuracion confi = new Configuracion();
+
+		//creacion de configuacion
+		confi.setNombreEmpresa("GOGO");
+		confi.setLogo("Tu lacer es nuestra meta");
+		confi.setCorreoEmpresa("gogo@gmail.com");
+
+		return Stream.of(confi);
+	}
+
+	@ParameterizedTest
+    @MethodSource("generadorConfig")
+    public void crearConfig(Configuracion config){
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        
+        when(configuracionService.actualizar(any(Configuracion.class))).thenReturn(config);
+        
+        Configuracion response = configuracionRestController.actualizar(config);
+        
+        assertTrue(response.equals(config));
+        
+    }
+
+	//creacion de Usuario
+	static Stream<Usuario> generadorUsuario(){
+
+		Usuario usu = new Usuario();
+
+		//creacion de usuario
+		usu.setIdentificadorUsuario("0150019453");
+		usu.setCargo("Admin");
+		usu.setCorreo("ejemplo@est.ups.edu.ec");
+		usu.setNombre("Denys Dutan");
+		usu.setPassword("ejemplo");
+
+		return Stream.of(usu);
+	}
+
+	@ParameterizedTest
+    @MethodSource("generadorUsuario")
+    public void crearUsuario(Usuario usu){
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        
+        when(usuarioService.guardar(any(Usuario.class))).thenReturn(usu);
+        
+        Usuario response = usuarioRestConroller.createUsuario(usu);
+        
+        assertTrue(response.equals(usu));
+        
+    }
+
+	@ParameterizedTest
+    @MethodSource("generadorUsuario")
+	public void findAllUsuarios(Usuario usu){
+		MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+		
+		when(usuarioRestConroller.findAll()).thenReturn(Arrays.asList(usu));
+		assertNotNull(usuarioRestConroller.findAll());
+	}
+
+	@ParameterizedTest
+    @MethodSource("generadorUsuario")
+	public void findByIdUsuarios(Usuario usu){
+		MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+		String id ="0150019453";
+		when(usuarioRestConroller.findUsuario(id)).thenReturn(usu);
+		assertNotNull(usuarioRestConroller.findUsuario(id));
+	}
 
 }
