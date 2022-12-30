@@ -49,7 +49,7 @@ public class DetalleCuentaServiceTest {
 	}
 
 	@ParameterizedTest
-	@MethodSource("generator")
+	@MethodSource("generadorDetalleCuenta")
 	public void saveCuenta(DetalleCuenta dcue) {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
@@ -63,7 +63,7 @@ public class DetalleCuentaServiceTest {
 	}
 
 	@ParameterizedTest
-	@MethodSource("generator")
+	@MethodSource("generadorDetalleCuenta")
 	public void findAll(DetalleCuenta dcue) {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
