@@ -1,14 +1,26 @@
 package ec.edu.ups.InstaWallet.test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
+import ec.edu.ups.InstaWallet.modelo.Credito;
+import ec.edu.ups.InstaWallet.modelo.DetalleCuenta;
+import ec.edu.ups.InstaWallet.modelo.Socio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -63,8 +75,37 @@ public class CuentaControllerTest {
 		}*/
 
     }
-    
-    
+
+    @ParameterizedTest
+    @MethodSource("generadorCuenta")
+    public void crearSocio(Cuenta cuenta){
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+        when(cuentaService.save(any(Cuenta.class))).thenReturn(cuenta);
+
+        ResponseEntity<Cuenta> response = cuentaResController.crearCuenta(cuenta);
+        assertTrue(response.getStatusCodeValue()==201);
+
+    }
+
+    static Stream<Cuenta> generadorCuenta(){
+
+        Cuenta cuenta = new Cuenta();
+        List<DetalleCuenta> dtc = new ArrayList<>();
+        List<Credito> credito = new ArrayList<>();
+
+        //creacion de usuario
+        cuenta.setEstado(true);
+        cuenta.setDetallesCuentas(dtc);
+        cuenta.setCreditos(credito);
+        cuenta.setNumerCuenta("001");
+        cuenta.setMonto(100.00);
+        cuenta.setFechaCreacion(new Date());
+        cuenta.setSocioIdentificacion("0150019453");
+
+        return Stream.of(cuenta);
+    }
         
 
 }

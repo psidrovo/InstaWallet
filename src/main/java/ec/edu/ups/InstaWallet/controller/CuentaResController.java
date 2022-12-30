@@ -31,7 +31,7 @@ public class CuentaResController {
 
 	@PostMapping("/")
 	@Operation(summary = "Crear una cuenta")
-	ResponseEntity<Cuenta> crearCuenta(@Valid @RequestBody Cuenta cuenta){
+	public ResponseEntity<Cuenta> crearCuenta(@Valid @RequestBody Cuenta cuenta){
 		System.out.println("Cuenta recibida: " + cuenta);
 		return new ResponseEntity<>(this.cuentaService.save(cuenta), HttpStatus.CREATED);
     }

@@ -198,7 +198,7 @@ class InstaWalletApplicationTests {
 		assertNotNull(usuarioRestConroller.findUsuario(id));
 	}
 
-    	//creacion de Usuario
+    	//creacion de Socio
 	static Stream<Socio> generadorSocio(){
 
 		Socio socio = new Socio();
@@ -214,7 +214,7 @@ class InstaWalletApplicationTests {
 		return Stream.of(socio);
 	}
 
-    //Test Crear Usuario
+    //Test Crear Socio
 	@ParameterizedTest
     @MethodSource("generadorSocio")
     public void crearSocio(Socio socio){
@@ -224,9 +224,7 @@ class InstaWalletApplicationTests {
         when(socioService.crearSocio(any(Socio.class))).thenReturn(socio);
         
         ResponseEntity<Socio> response = socioRestController.crear(socio);
-        
-        //ESTE METODO ESTA MAL PAUL ARREGLA 
-        assertTrue(!response.equals(HttpStatus.OK));
+        assertTrue(response.getStatusCodeValue()==201);
         
     }
 
