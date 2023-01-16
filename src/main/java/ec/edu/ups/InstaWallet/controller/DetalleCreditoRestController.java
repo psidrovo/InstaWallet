@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import ec.edu.ups.InstaWallet.services.CreditoService;
 import ec.edu.ups.InstaWallet.services.DetalleCreditoService;
 import io.swagger.v3.oas.annotations.Operation;
 
+@CrossOrigin("*")
 public class DetalleCreditoRestController {
 
     private DetalleCreditoService detalleCreditoService;

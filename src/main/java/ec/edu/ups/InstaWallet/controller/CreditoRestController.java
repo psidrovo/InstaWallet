@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/credito")
 @Tag(name = "Credito", description = "Operaciones de la clase Crédito")
 public class CreditoRestController {
@@ -38,6 +40,7 @@ public class CreditoRestController {
         return creditoService.save(credito);
     }
 
+    @CrossOrigin
     @PostMapping("/aprobar-rechazar-credito")
     @Operation(summary = "Aprobar o rechazar un crédito")
     public void aprobarRechazarCredito(@RequestParam Integer id, @RequestParam String aprobarRechazar) {
@@ -72,7 +75,7 @@ public class CreditoRestController {
     @GetMapping("/tabla-amortizacion")
     @Operation(summary = "Crear una tabla de amortización")
     public ArrayList<DetalleCredito> generarTablaAmortizacion(@RequestParam int numeroDeCuotas,
-            @RequestParam Date fechaInicio,
+            //@RequestParam Date fechaInicio,
             @RequestParam double valorCredito) {
 
         double pagoMensual = valorCredito / numeroDeCuotas;
