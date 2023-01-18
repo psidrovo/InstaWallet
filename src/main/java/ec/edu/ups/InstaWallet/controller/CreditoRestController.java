@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/credito")
 @Tag(name = "Credito", description = "Operaciones de la clase Crédito")
 public class CreditoRestController {
@@ -79,7 +79,8 @@ public class CreditoRestController {
             @RequestParam double valorCredito) {
 
         double pagoMensual = valorCredito / numeroDeCuotas;
-        double interes = creditoService.calculoInteres(valorCredito);
+        //double interes = creditoService.calculoInteres(valorCredito);
+        double interes = 0.5;
         double calucloPago = pagoMensual * interes;
         double total = pagoMensual + calucloPago;
         double pago = Math.round(total);

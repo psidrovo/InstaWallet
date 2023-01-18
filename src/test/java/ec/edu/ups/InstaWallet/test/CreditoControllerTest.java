@@ -89,7 +89,7 @@ public class CreditoControllerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
                
-        ArrayList<DetalleCredito> response = creditoRestController.generarTablaAmortizacion(12, new Date(), 1000.00);
+        ArrayList<DetalleCredito> response = creditoRestController.generarTablaAmortizacion(12, 1000.00);
         
         assertTrue(response.size() == 12);
         
