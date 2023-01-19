@@ -36,7 +36,7 @@ public class CreditoRestController {
 
     @PostMapping("/")
     @Operation(summary = "Crear un credito")
-    public Credito crearCredito(@Valid @RequestBody Credito credito) {
+    public Credito crearCredito(@RequestBody Credito credito) {
         return creditoService.save(credito);
     }
 
