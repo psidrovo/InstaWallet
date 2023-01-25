@@ -72,6 +72,26 @@ public class CreditoRestController {
         }
     }
 
+
+    @GetMapping("/findAllPendientes")
+    @Operation(summary = "Encontar creditos que estan pendientes de aprovación o rechazo")
+    public ArrayList<Credito> findAllPendiente(){
+        var listaTodos = creditoService.findAll();
+        ArrayList<Credito> creditosPendientes = new ArrayList<>();
+
+        for(Credito cre:listaTodos){
+            if(cre.getEstadoSolicitudCredito().equalsIgnoreCase("en trámite")){
+                creditosPendientes.add(cre);
+            }
+
+        }
+
+        return creditosPendientes;
+    }
+
+
+
+
     @GetMapping("/tabla-amortizacion")
     @Operation(summary = "Crear una tabla de amortización")
     public ArrayList<DetalleCredito> generarTablaAmortizacion(@RequestParam int numeroDeCuotas,
