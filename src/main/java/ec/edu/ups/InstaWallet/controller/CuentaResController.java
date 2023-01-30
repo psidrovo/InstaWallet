@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/cuenta")
 @Tag(name = "Cuenta", description = "Operaciones de la clase Cuenta")
 public class CuentaResController {
@@ -32,6 +33,7 @@ public class CuentaResController {
 	@PostMapping("/")
 	@Operation(summary = "Crear una cuenta")
 	public ResponseEntity<Cuenta> crearCuenta(@Valid @RequestBody Cuenta cuenta){
+		//cuenta.setSocioIdentificacion(null)
 		System.out.println("Cuenta recibida: " + cuenta);
 		return new ResponseEntity<>(this.cuentaService.save(cuenta), HttpStatus.CREATED);
     }

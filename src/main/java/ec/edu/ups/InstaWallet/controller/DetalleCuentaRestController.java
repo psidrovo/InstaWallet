@@ -17,6 +17,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/detalleCuenta")
+@CrossOrigin(origins = "http://localhost:4200")
 @Tag(name = "DetalleCuenta", description = "Operaciones de la clase DetalleCuenta")
 public class DetalleCuentaRestController {
 	
