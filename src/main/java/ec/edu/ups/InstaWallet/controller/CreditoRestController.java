@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/credito")
 @Tag(name = "Credito", description = "Operaciones de la clase Crédito")
 public class CreditoRestController {
@@ -34,10 +36,11 @@ public class CreditoRestController {
 
     @PostMapping("/")
     @Operation(summary = "Crear un credito")
-    public Credito crearCredito(@Valid @RequestBody Credito credito) {
+    public Credito crearCredito(@RequestBody Credito credito) {
         return creditoService.save(credito);
     }
 
+    @CrossOrigin
     @PostMapping("/aprobar-rechazar-credito")
     @Operation(summary = "Aprobar o rechazar un crédito")
     public void aprobarRechazarCredito(@RequestParam Integer id, @RequestParam String aprobarRechazar) {
@@ -69,14 +72,35 @@ public class CreditoRestController {
         }
     }
 
+
+    @GetMapping("/findAllPendientes")
+    @Operation(summary = "Encontar creditos que estan pendientes de aprovación o rechazo")
+    public ArrayList<Credito> findAllPendiente(){
+        var listaTodos = creditoService.findAll();
+        ArrayList<Credito> creditosPendientes = new ArrayList<>();
+
+        for(Credito cre:listaTodos){
+            if(cre.getEstadoSolicitudCredito().equalsIgnoreCase("en trámite")){
+                creditosPendientes.add(cre);
+            }
+
+        }
+
+        return creditosPendientes;
+    }
+
+
+
+
     @GetMapping("/tabla-amortizacion")
     @Operation(summary = "Crear una tabla de amortización")
     public ArrayList<DetalleCredito> generarTablaAmortizacion(@RequestParam int numeroDeCuotas,
-            @RequestParam Date fechaInicio,
+            //@RequestParam Date fechaInicio,
             @RequestParam double valorCredito) {
 
         double pagoMensual = valorCredito / numeroDeCuotas;
-        double interes = creditoService.calculoInteres(valorCredito);
+        //double interes = creditoService.calculoInteres(valorCredito);
+        double interes = 0.5;
         double calucloPago = pagoMensual * interes;
         double total = pagoMensual + calucloPago;
         double pago = Math.round(total);
