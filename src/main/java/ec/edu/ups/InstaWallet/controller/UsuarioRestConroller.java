@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/usuario")
+@CrossOrigin(origins = "http://localhost:4200")
 @Tag(name = "Usuario", description = "Operaciones basicas de usuarios")
 public class UsuarioRestConroller {
 
@@ -40,9 +41,9 @@ public class UsuarioRestConroller {
         return this.usuariosService.guardar(usuario);
     }
 
-    @PostMapping("/findById{id}")
+    @PostMapping("/findById/{id}")
     @Operation(summary = "Metodo de creacion de usuario")
-    public Usuario findUsuario(@RequestBody String id){
+    public Usuario findUsuario(@PathVariable ("id") String id){
         return usuariosService.findById(id);
     }
 }
