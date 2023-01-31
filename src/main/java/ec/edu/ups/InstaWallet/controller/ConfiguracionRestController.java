@@ -11,13 +11,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 /**
  *
  * @author dduta
  */
 @RestController
 @RequestMapping("/configuracion")
+@CrossOrigin(origins = "http://localhost:4200")
 @Tag(name = "Configuracion", description = "configuracion basica de un usuario")
 public class ConfiguracionRestController {
     
